@@ -383,30 +383,25 @@
         <img src="georg-ohm.png" alt="Georg Simon Ohm" width="180" style="border-radius: 300%; border: 3px solid #ffff00;">
     </div>
 </div>
-<div style="background: rgb(31, 30, 30); padding: 20px; border-radius: 10px; margin: 20px 0; font-family: sans-serif; border: 1px solid #ccc;">
-    <h3 style="color: #fff8f8;">🧮 Calculadora de Resistencia en Paralelo</h3>
-    <p>Ingresa los valores de las resistencias (separados por comas):</p>
-    
-    <input type="text" id="resistenciasInput" placeholder="Ejemplo: 10, 20, 30" style="padding: 10px; width: 70%; border-radius: 5px; border: 1px solid #aaa;">
-    
-    <button onclick="calcularParalelo()" style="padding: 10px 20px; background-color: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer;">
-        Calcular RT
-    </button>
+<div class="wrapper-neon">
+    <div class="calculadora-neon">
+        <h3>🧮 Calculadora de Resistencia en Paralelo</h3>
+        <p>Ingresa los valores de las resistencias (separados por comas):</p>
+        
+        <div class="input-group">
+            <input type="text" id="resistenciasInput" placeholder="Ejemplo: 10, 20, 30">
+            <button onclick="calcularParalelo()">Calcular RT</button>
+        </div>
 
-    <div id="resultado" style="margin-top: 20px; font-weight: bold; font-size: 1.2em; color: #007bff;">
-        Resultado: --
+        <div id="resultado">Resultado: --</div>
     </div>
 </div>
 
 <script>
+
 function calcularParalelo() {
-    // 1. Obtenemos lo que el usuario escribió
     let input = document.getElementById("resistenciasInput").value;
-    
-    // 2. Convertimos ese texto en una lista de números
     let valores = input.split(',').map(Number);
-    
-    // 3. Aplicamos la fórmula: 1 / (1/R1 + 1/R2 + ...)
     let sumaInversas = 0;
     let error = false;
 
@@ -425,10 +420,63 @@ function calcularParalelo() {
         resultadoDiv.style.color = "red";
     } else {
         let resistenciaTotal = 1 / sumaInversas;
-        resultadoDiv.innerHTML = "✅ Resistencia Total ($R_T$): " + resistenciaTotal.toFixed(2) + " Ω";
-        resultadoDiv.style.color = "#007bff";
+        resultadoDiv.innerHTML = "✅ Resistencia Total (R<sub>T</sub>): " + resistenciaTotal.toFixed(2) + " Ω";
+        resultadoDiv.style.color = "#ffffff";
     }
 }
 </script>
+<style>
+.wrapper-neon {
+    position: relative;
+    max-width: 550px;
+    margin: 20px auto;
+    padding: 3px; /* Este es el grosor de la línea de neón */
+    border-radius: 15px;
+    overflow: hidden; /* Corta la luz para que solo se vea en el borde */
+    background: #000000;
+}
+
+/* 2. La luz de colores que se mueve (Rojo, Amarillo, Verde, Azul, Magenta) */
+.wrapper-neon::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    /* Gradiente con tus colores específicos */
+    background: conic-gradient(
+        #ff0000, #ffff00, #00ff00, #00ffff, #0000ff, #ff00ff, #ff0000
+    );
+    animation: fluir-colores 2s linear infinite;
+}
+.calculadora-neon {
+    position: relative;
+    z-index: 1; /* Se pone delante de la luz */
+    background: rgb(19, 19, 19); /* Tu color original */
+    padding: 25px;
+    border-radius: 13px;
+    font-family: sans-serif;
+    color: white;
+}
+
+/* 4. Animación del borde */
+@keyframes fluir-colores {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Estilos internos para que se vea bien */
+.input-group { display: flex; gap: 10px; margin-top: 20px; }
+#resistenciasInput { 
+    padding: 10px; flex: 1; border-radius: 5px; border: 1px solid #629ec0; 
+    background: #222; color: white; 
+}
+button { 
+    padding: 10px 20px; background: #28a745; color: white; 
+    border: none; border-radius: 7px; cursor: pointer; font-weight: bold;
+}
+#resultado { margin-top: 20px; font-weight: bold; }
+</style>
 </body>
 </html>
