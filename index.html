@@ -426,14 +426,15 @@ function calcularParalelo() {
 }
 </script>
 <style>
+/* 1. El marco que contiene la luz de colores */
 .wrapper-neon {
     position: relative;
     max-width: 550px;
     margin: 20px auto;
-    padding: 3px; /* Este es el grosor de la línea de neón */
+    padding: 4px; /* Este es el grosor de la línea de neón */
     border-radius: 15px;
     overflow: hidden; /* Corta la luz para que solo se vea en el borde */
-    background: #000000;
+    background: #000;
 }
 
 /* 2. La luz de colores que se mueve (Rojo, Amarillo, Verde, Azul, Magenta) */
@@ -448,14 +449,16 @@ function calcularParalelo() {
     background: conic-gradient(
         #ff0000, #ffff00, #00ff00, #00ffff, #0000ff, #ff00ff, #ff0000
     );
-    animation: fluir-colores 2s linear infinite;
+    animation: fluir-colores 4s linear infinite;
 }
+
+/* 3. Tu contenedor (la parte negra que tapa el centro) */
 .calculadora-neon {
     position: relative;
     z-index: 1; /* Se pone delante de la luz */
-    background: rgb(19, 19, 19); /* Tu color original */
+    background: rgb(31, 30, 30); /* Tu color original */
     padding: 25px;
-    border-radius: 13px;
+    border-radius: 12px;
     font-family: sans-serif;
     color: white;
 }
@@ -467,14 +470,14 @@ function calcularParalelo() {
 }
 
 /* Estilos internos para que se vea bien */
-.input-group { display: flex; gap: 10px; margin-top: 20px; }
+.input-group { display: flex; gap: 10px; margin-top: 15px; }
 #resistenciasInput { 
-    padding: 10px; flex: 1; border-radius: 5px; border: 1px solid #629ec0; 
+    padding: 10px; flex: 1; border-radius: 5px; border: 1px solid #444; 
     background: #222; color: white; 
 }
 button { 
     padding: 10px 20px; background: #28a745; color: white; 
-    border: none; border-radius: 7px; cursor: pointer; font-weight: bold;
+    border: none; border-radius: 5px; cursor: pointer; font-weight: bold;
 }
 #resultado { margin-top: 20px; font-weight: bold; }
 </style>
