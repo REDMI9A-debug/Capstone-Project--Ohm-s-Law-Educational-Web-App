@@ -397,30 +397,58 @@
 </div>
 
 <script>
-
-function calcularParalelo() {
+  function calcularParalelo() {
+    // 1. Obtenemos lo que escribiste
     let input = document.getElementById("resistenciasInput").value;
-    let valores = input.split(',').map(Number);
+    
+    // 2. Limpiamos espacios y convertimos a números
+    let valores = input.split(',').map(v => v.trim()).filter(v => v !== "").map(Number);
+    
     let sumaInversas = 0;
     let error = false;
 
-    valores.forEach(r => {
+    // --- REGLA DE ORO: Limpiar el simulador antes de empezar ---
+    for (let i = 1; i <= 3; i++) {
+        let caja = document.getElementById("vis-R" + i);
+        if (caja) {
+            caja.innerText = "R" + i;
+            caja.style.color = "white";
+            caja.style.boxShadow = "none";
+            caja.style.borderColor = "white";
+        }
+    }
+
+    // 3. Procesar valores y moverlos al simulador
+    valores.forEach((r, index) => {
         if (r > 0) {
             sumaInversas += (1 / r);
+            
+            // Buscamos la caja correspondiente (vis-R1, vis-R2, o vis-R3)
+            let idVisual = "vis-R" + (index + 1);
+            let cajaVisual = document.getElementById(idVisual);
+            
+            if (cajaVisual) {
+                // Ponemos el número en la caja del dibujo
+                cajaVisual.innerText = r + " Ω";
+                cajaVisual.style.color = "#00ff00"; // Color verde neón
+                cajaVisual.style.borderColor = "#00ff00";
+                cajaVisual.style.boxShadow = "0 0 10px #00ff00";
+            }
         } else {
             error = true;
         }
     });
 
+    // 4. Mostrar el resultado final
     let resultadoDiv = document.getElementById("resultado");
 
     if (error || valores.length === 0 || input === "") {
-        resultadoDiv.innerHTML = "❌ Por favor, ingresa números válidos mayores a 0.";
+        resultadoDiv.innerHTML = "❌ Ingresa números válidos (mayores a 0).";
         resultadoDiv.style.color = "red";
     } else {
         let resistenciaTotal = 1 / sumaInversas;
         resultadoDiv.innerHTML = "✅ Resistencia Total (R<sub>T</sub>): " + resistenciaTotal.toFixed(2) + " Ω";
-        resultadoDiv.style.color = "#ffffff";
+        resultadoDiv.style.color = "#007bff";
     }
 }
 </script>
@@ -479,6 +507,101 @@ button {
     border: none; border-radius: 5px; cursor: pointer; font-weight: bold;
 }
 #resultado { margin-top: 20px; font-weight: bold; }
+</style>
+<div id="calcespec" class="simulador-container">
+    <h4>Simulación del Circuito en Paralelo</h4>
+    <div class="circuito">
+        <div class="cable-entrada"></div>
+        <div class="nodos-paralelo">
+            <div class="rama">
+                <div class="resistencia-visual" id="vis-R1">R1</div>
+            </div>
+            <div class="rama">
+                <div class="resistencia-visual" id="vis-R2">R2</div>
+            </div>
+            <div class="rama">
+                <div class="resistencia-visual" id="vis-R3">R3</div>
+            </div>
+        </div>
+        <div class="cable-salida"></div>
+    </div>
+    <p id="info-simulacion">Escribe valores arriba para ver el flujo.</p>
+</div>
+<style>
+  .simulador-container {
+    background: #1e1e1e;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    margin-top: 30px;
+    color: white;
+    border: 1px solid #444;
+}
+
+.circuito {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    margin: 20px 0;
+}
+
+/* Cables horizontales */
+.cable-entrada, .cable-salida {
+    width: 50px;
+    height: 4px;
+    background: #00ff00; /* Color de energía */
+    box-shadow: 0 0 10px #00ff00;
+}
+
+/* El bloque donde se dividen las ramas */
+.nodos-paralelo {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 100%;
+    border-left: 4px solid #00ff00;
+    border-right: 4px solid #00ff00;
+    padding: 0 20px;
+}
+
+.rama {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 2px;
+    background: #00ff00;
+    position: relative;
+}
+
+/* El rectángulo de la resistencia */
+.resistencia-visual {
+    width: 40px;
+    height: 20px;
+    background: #333;
+    border: 2px solid #fff;
+    color: #fff;
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+    transition: all 0.3s ease;
+}
+
+/* Animación de flujo (opcional) */
+.cable-entrada, .rama, .cable-salida {
+    animation: brillo-flujo 1.5s infinite alternate;
+}
+
+@keyframes brillo-flujo {
+    from { opacity: 0.6; }
+    to { opacity: 1; box-shadow: 0 0 15px #00ff00; }
+}
+#calcespec {
+    box-shadow: 0 0 45px rgba(0, 255, 0, 0.3) !important;
+}
 </style>
 </body>
 </html>
