@@ -428,28 +428,28 @@ function calcularParalelo() {
 <style>
 /* 1. El marco que contiene la luz de colores */
 .wrapper-neon {
-    position: relative;
-    max-width: 550px;
+ position: relative;
+    max-width: 95%;      /* Cambia el ancho fijo por un porcentaje para celular */
     margin: 20px auto;
-    padding: 4px; /* Este es el grosor de la línea de neón */
+    padding: 3px;        /* Un borde un poco más delgado se ve mejor en móvil */
     border-radius: 15px;
-    overflow: hidden; /* Corta la luz para que solo se vea en el borde */
-    background: #000;
+    overflow: hidden;
+    display: block;      /* Asegura que ocupe su lugar correctamente */
+    box-sizing: border-box; /* Fundamental para que el padding no "empuje" hacia afuera */
 }
 
 /* 2. La luz de colores que se mueve (Rojo, Amarillo, Verde, Azul, Magenta) */
 .wrapper-neon::before {
     content: '';
     position: absolute;
-    top: -55%;
-    left: -55%;
-    width: 200%;
-    height: 200%;
-    /* Gradiente con tus colores específicos */
+    top: -150%;  /* Aumentamos el tamaño para que siempre sobre luz */
+    left: -150%;
+    width: 400%; /* Mucho más grande para evitar recortes al girar */
+    height: 400%;
     background: conic-gradient(
         #ff0000, #ffff00, #00ff00, #00ffff, #0000ff, #ff00ff, #ff0000
     );
-    animation: fluir-colores 2s linear infinite;
+    animation: fluir-colores 4s linear infinite;
 }
 
 /* 3. Tu contenedor (la parte negra que tapa el centro) */
