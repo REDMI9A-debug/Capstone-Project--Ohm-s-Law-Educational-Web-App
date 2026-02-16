@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Proyecto: Circuito en Paralelo</title>
+<style>
+  :root {
+    --wire-off: #444;
+    --wire-on: #00ff00;
+    --bulb-off: #555;
+    --bulb-on: #ffeb3b;
+  }
+
+  body {
+    background: linear-gradient(35deg, #000000, #414345);     
+    color: #e0e0e0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+
+  .header {
+    text-align: center;
+    max-width: 650px;
+    margin-bottom: 20px;
+  }
+
+  h1 { color: var(--wire-on); text-transform: uppercase; }
+
+  .circuit-container {
+    display: flex;
+    align-items: center;
+    background: #1e1e1e;
+    padding: 50px;
+    border-radius: 15px;
+    border: 1px solid #333;
+    position: relative;
+  }
+
+  .label {
+    position: absolute;
+    font-size: 12px;
+    background: rgba(0, 0, 0, 0.219);
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: #aaa;
+  }
+
+  .wire-rail {
+    height: 4px;
+    background: var(--wire-off);
+    transition: background 0.3s, box-shadow 0.3s;
+  }
+
+  .power-side {
+    width: 60px;
+    height: 180px;
+    border-left: 4px solid var(--wire-off);
+    border-top: 4px solid var(--wire-off);
+    border-bottom: 4px solid var(--wire-off);
+    border-radius: 10px 0 0 10px;
+    position: relative;
+    transition: all 0.3s;
+  }
+
+  .battery {
+    width: 40px;
+    height: 60px;
+    background: #333;
+    border: 2px solid #888;
+    position: absolute;
+    left: -22px;
+    top: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+  }
+
+  .branch {
+    width: 120px;
+    height: 180px;
+    border-top: 4px solid var(--wire-off);
+    border-bottom: 4px solid var(--wire-off);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    transition: all 0.3s;
+  }
+
+  .vertical-wire {
+    width: 4px;
+    height: 100%;
+    background: var(--wire-off);
+    position: absolute;
+    transition: background 0.3s;
+  }
+
+  .bulb {
+    width: 45px;
+    height: 45px;
+    background: var(--bulb-off);
+    border-radius: 50%;
+    border: 2px solid #777;
+    z-index: 2;
+    transition: all 0.3s;
+    box-shadow: inset 0 0 10px rgba(131, 126, 126, 0.5);
+  }
+
+  .circuit-end {
+    width: 30px;
+    height: 180px;
+    border-right: 4px solid var(--wire-off);
+    border-top: 4px solid var(--wire-off);
+    border-bottom: 4px solid var(--wire-off);
+    border-radius: 0 10px 10px 0;
+    transition: all 0.3s;
+  }
+
+  body.on .power-side, body.on .branch, body.on .circuit-end {
+    border-color: var(--wire-on);
+    box-shadow: 0 0 5px rgba(56, 56, 56, 0.918);
+  }
+  body.on .vertical-wire { background: var(--wire-on); }
+  body.on .bulb {
+    background: var(--bulb-on);
+    border-color: #ffffff;
+    box-shadow: 0 0 30px var(--bulb-on), 0 0 10px rgb(255, 251, 5);
+  }
+
+  button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    background: var(--wire-on);
+    border: none;
+    border-radius: 10px;
+    color: #000000;
+    transition: transform 0.2s;
+  }
+
+  button:active { transform: scale(0.90); 
+  filter: brightness(0.8);
+  }
+</style>
+</head>
+<body>
+
+  <div class="header">
+    <h1>Circuito en Paralelo</h1>
+    <p>En un circuito en paralelo, el voltaje es el mismo en todos los componentes. Si un bombillo se desconecta, los demás permanecen encendidos porque cada uno tiene su propia conexión a la fuente.</p>
+  </div>
+
+  <div class="circuit-container">
+    <div class="label" style="top: 10px; left: -1px;">Riel Positivo (+)</div>
+    <div class="label" style="bottom: 10px; left: -1px;">Riel Negativo (-)</div>
+    <div class="label" style="top: 135px; left: -50px;">🔋 (Batería)</div>
+
+    <div class="power-side">
+      <div class="battery">9V⚡</div>
+    </div>
+
+    <div class="branch">
+      <div class="vertical-wire"></div>
+      <div class="bulb"></div>
+      <div class="label" style="bottom: -25px;">💡 1</div>
+    </div>
+
+    <div class="branch">
+      <div class="vertical-wire"></div>
+      <div class="bulb"></div>
+      <div class="label" style="bottom: -25px;">💡 2</div>
+    </div>
+
+    <div class="circuit-end"></div>
+  </div>
+
+  <button onclick="document.body.classList.toggle('on')">⚠️</button>
+
+  <div class="circuit-container info-box">
+<h3>Objetivo De Esta Página Web</h3>
+<p>Brindar un espacio educativo y práctico donde estudiantes, aficionados y profesionales puedan aprender, diseñar y comprender circuitos eléctricos, a través de contenido claro, interactivo y actualizado, fomentando el desarrollo de habilidades técnicas y la creatividad en el ámbito de la electrónica.</p>
+</div>
+<style>
+.info-box {
+  text-align: center;
+  margin-top: 20px;
+  background: #1e1e1e;
+  border-radius: 10px;
+  padding: 20px;
+  color: white;
+  display: block;
+  max-width: 700px;
+}
+</style>
+
+<div style="display: flex; gap: 20px; justify-content: center; margin-top: 20px; background: transparent; border: none;">
+
+    <div class="subtheme-card">
+        <span>⚡</span>
+        <p>Voltaje Constante</p>
+    </div>
+
+    <div class="subtheme-card">
+        <span>📈</span>
+        <p>Corriente Total</p>
+    </div>
+
+    <div class="subtheme-card">
+        <span>📉</span>
+        <p>Resistencia Total</p>
+    </div>
+
+    <div class="subtheme-card">
+        <span>⚖️</span>
+        <p>Ley de Ohm</p>
+    </div>
+
+</div>
+ <style>
+  .dashboard-tool-bar {
+  display: flex;
+  gap: 15px;
+  }
+
+
+.subtheme-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  background-color: #2a2a2a; 
+  padding: 12px 20px;
+  border-radius: 8px;
+  border: 1px solid #444; 
+  min-width: 80px;
+  transition: transform 0.2s;
+  text-align: center;
+}
+
+.subtheme-card:hover {
+  transform: translateY(-3px); 
+  background-color: #333;
+}
+
+.subtheme-icon {
+  font-size: 22px;
+  margin-bottom: 8px;
+}
+
+.subtheme-title {
+  color: #ffffff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  margin: 0;
+}
+</style>
+<div class="seccion-info">
+    <div class="texto-contenido">
+        <h3>¿Qué es el voltaje constante?</h3>
+        <p>El voltaje constante es aquel que no cambia en el tiempo. En un circuito en paralelo, cada componente recibe el mismo voltaje de la fuente, lo que permite que todos funcionen de manera independiente.</p>
+    <p><strong>Propiedad del Voltaje:</strong></p>
+<p style="color: #fff018; font-weight: bold;">
+    V<sub>t</sub> = V<sub>1</sub> = V<sub>2</sub> = V<sub>3</sub>
+</p>
+      </div>
+    
+    <img src="voltajeconstante.jpg" width="200" style="background-color: white; padding: 30px; border-radius: none;">
+</div>
+
+<style>
+.seccion-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    max-width: 1000px;
+    margin: 30px auto;
+    background-color: #1a1919;
+    padding: 25px;
+    border-radius: 10px;
+    border: 3px solid #333;
+}
+
+.texto-contenido {
+    max-width: 600px;
+    text-align: left;
+    color: white;
+}
+
+.seccion-info img {
+    border-radius: 5px;
+    background-color: rgba(54, 54, 54, 0.123); 
+    padding: 5px;
+}
+</style>
+<div class="seccion-info">
+    <div class="texto-contenido">
+        <h3>¿Qué es la Corriente Total (I<sub>t</sub>)?</h3>
+        <p>
+            En un circuito en paralelo, la corriente total es la suma de las corrientes que circulan por cada una de las ramas o componentes individuales. 
+            Imagina que el circuito es una tubería principal que se divide en varias mangueras; la cantidad de agua que sale de la fuente es igual a la suma del agua que pasa por todas las mangueras.
+        </p>
+
+        <h3>¿Cómo se calcula?</h3>
+        <p>Para obtenerla, existen dos formas principales dependiendo de los datos que tengas:</p>
+        <p><strong>Por suma de ramas:</strong> Si conoces la corriente de cada componente, simplemente las sumas:</p>
+        
+        <p style="color: #fff018; font-weight: bold; font-size: 1.2em;">
+            I<sub>t</sub> = I<sub>1</sub> + I<sub>2</sub> + I<sub>3</sub> + ... + I<sub>n</sub>
+        </p>
+    </div>
+
+    <img src="corrientetotal.png" width="250" style="border-radius: 10px; align-self: center;">
+</div>
+  <style>
+  .seccion-info {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    background-color: #292929;
+    padding: 25px;
+    border-radius: 10px;
+    margin: 10px auto;
+}
+
+.texto-contenido {
+    flex: 1;
+    margin-right: 30px; 
+}
+</style>
+<div class="seccion-info">
+    <div class="texto-contenido">
+        <h3>¿Qué es la Resistencia Total (R<sub>t</sub>)?</h3>
+        <p>
+            En un circuito en paralelo, la resistencia total (o equivalente) siempre es <strong>menor</strong> que la resistencia de la rama más pequeña. Esto sucede porque al haber más caminos para la corriente, la "dificultad" general para que esta fluya disminuye.
+        </p>
+        
+        <p><strong>Fórmula Clave:</strong></p>
+        <p style="color: #fff018; font-weight: bold; font-size: 1.1em;">
+            1 / R<sub>t</sub> = 1 / R<sub>1</sub> + 1 / R<sub>2</sub> + 1 / R<sub>3</sub> + ... + 1 / R<sub>n</sub>
+        </p>
+        
+        <p>
+            Para el caso especial de solo dos resistencias, puedes usar la fórmula simplificada: 
+            <em>R<sub>t</sub> = (R<sub>1</sub> * R<sub>2</sub>) / (R<sub>1</sub> + R<sub>2</sub>)</em>.
+        </p>
+    </div>
+
+    <img src="resistenciatotal.png" width="250" style="border-radius: 10px;">
+</div>
+<div class="seccion-info">
+    <div class="texto-contenido">
+        <h3>La Ley de Ohm</h3>
+        <p>
+            Relaciona el <strong>Voltaje (V)</strong>, la <strong>Intensidad (I)</strong> y la <strong>Resistencia (R)</strong>. Es la base para entender cómo fluye la energía en cualquier dispositivo tecnológico.
+        </p>
+
+        <p><strong>Fórmulas de despeje:</strong></p>
+        <ul>
+            <li>Para Voltaje: <strong>V = I &times; R</strong></li>
+            <li>Para Intensidad: <strong>I = V / R</strong></li>
+            <li>Para Resistencia: <strong>R = V / I</strong></li>
+        </ul>
+
+        <div style="background-color: #3d3d3d; padding: 12px; border-left: 5px solid #ffff00; margin-top: 15px;">
+            <p style="margin: 0;"><strong>💡 Dato Curioso:</strong></p>
+            <p style="font-style: italic; font-size: 0.9em; margin-top: 5px;">
+                Georg Simon Ohm fue un físico alemán que, pese a ser inicialmente rechazado por sus colegas, logró demostrar la relación matemática de la electricidad que usamos hoy en todas las TIC.
+            </p>
+        </div>
+    </div>
+
+ <div class="ohm-content-images">
+        <img src="triangulodeohm.png" alt="Triángulo de la Ley de Ohm" width="200" style="border-radius: 8px; background: rgba(73, 71, 71, 0.548); padding: 5px;">
+        <img src="georg-ohm.png" alt="Georg Simon Ohm" width="180" style="border-radius: 300%; border: 3px solid #ffff00;">
+    </div>
+</div>
+<div class="wrapper-neon">
+    <div class="calculadora-neon">
+        <h3>🧮 Calculadora de Resistencia en Paralelo</h3>
+        <p>Ingresa los valores de las resistencias (separados por comas):</p>
+        
+        <div class="input-group">
+            <input type="text" id="resistenciasInput" placeholder="Ejemplo: 10, 20, 30">
+            <button onclick="calcularParalelo()">Calcular RT</button>
+        </div>
+
+        <div id="resultado">Resultado: --</div>
+    </div>
+</div>
+
+<script>
+  function calcularParalelo() {
+    // 1. Obtenemos lo que escribiste
+    let input = document.getElementById("resistenciasInput").value;
+    
+    // 2. Limpiamos espacios y convertimos a números
+    let valores = input.split(',').map(v => v.trim()).filter(v => v !== "").map(Number);
+    
+    let sumaInversas = 0;
+    let error = false;
+
+    // --- REGLA DE ORO: Limpiar el simulador antes de empezar ---
+    for (let i = 1; i <= 3; i++) {
+        let caja = document.getElementById("vis-R" + i);
+        if (caja) {
+            caja.innerText = "R" + i;
+            caja.style.color = "white";
+            caja.style.boxShadow = "none";
+            caja.style.borderColor = "white";
+        }
+    }
+
+    // 3. Procesar valores y moverlos al simulador
+    valores.forEach((r, index) => {
+        if (r > 0) {
+            sumaInversas += (1 / r);
+            
+            // Buscamos la caja correspondiente (vis-R1, vis-R2, o vis-R3)
+            let idVisual = "vis-R" + (index + 1);
+            let cajaVisual = document.getElementById(idVisual);
+            
+            if (cajaVisual) {
+                // Ponemos el número en la caja del dibujo
+                cajaVisual.innerText = r + " Ω";
+                cajaVisual.style.color = "#00ff00"; // Color verde neón
+                cajaVisual.style.borderColor = "#00ff00";
+                cajaVisual.style.boxShadow = "0 0 10px #00ff00";
+            }
+        } else {
+            error = true;
+        }
+    });
+// 4. Mostrar el resultado final
+    let resultadoDiv = document.getElementById("resultado");
+if (error || valores.length === 0 || input === "") {
+        resultadoDiv.innerHTML = "❌ Ingresa números válidos (mayores a 0).";
+        resultadoDiv.style.color = "red";
+    } else {
+        let resistenciaTotal = 1 / sumaInversas;
+        resultadoDiv.innerHTML = "✅ Resistencia Total (R<sub>T</sub>): " + resistenciaTotal.toFixed(2) + " Ω";
+        resultadoDiv.style.color = "#007bff";
+    }
+}
+</script>
+<div class="pasos-superiores">
+    <h3 style="color: #00ff00; margin-top: 0;">🚀 Pasos para usar la Calculadora</h3>
+    <ul style="color: white; list-style: none; padding: 0;">
+        <li>1. Ingresa las resistencias separadas por comas.</li>
+        <li>2. Haz clic en "Calcular RT".</li>
+        <li>3. Mira el diagrama de la derecha para ver los valores.</li>
+    </ul>
+</div>
+<div class="contenedor-principal">
+    <div class="wrapper-neon">
+        <h2 style="color: white; text-align: center;">Calculadora</h2>
+        <input type="text" id="resistenciasInput" placeholder="Ejemplo: 10, 20, 30">
+        <button onclick="calcularParalelo()">Calcular RT</button>
+        <div id="resultado"></div>
+    </div>
+
+    <div class="simulador-container">
+        <h2 style="color: white; text-align: center;">Diagrama</h2>
+        <div class="circuito">
+            </div>
+    </div>
+
+</div>
+<style>
+/* 1. El marco que contiene la luz de colores */
+.wrapper-neon {
+ position: relative;
+    max-width: 95%;      /* Cambia el ancho fijo por un porcentaje para celular */
+    margin: 20px auto;
+    padding: 3px;        /* Un borde un poco más delgado se ve mejor en móvil */
+    border-radius: 15px;
+    overflow: hidden;
+    display: block;      /* Asegura que ocupe su lugar correctamente */
+    box-sizing: border-box; /* Fundamental para que el padding no "empuje" hacia afuera */
+}
+
+/* 2. La luz de colores que se mueve (Rojo, Amarillo, Verde, Azul, Magenta) */
+.wrapper-neon::before {
+    content: '';
+    position: absolute;
+    top: -150%;  /* Aumentamos el tamaño para que siempre sobre luz */
+    left: -150%;
+    width: 400%; /* Mucho más grande para evitar recortes al girar */
+    height: 400%;
+    background: conic-gradient(
+        #ff0000, #ffff00, #00ff00, #00ffff, #0000ff, #ff00ff, #ff0000
+    );
+    animation: fluir-colores 4s linear infinite;
+}
+
+/* 3. Tu contenedor (la parte negra que tapa el centro) */
+.calculadora-neon {
+    position: relative;
+    z-index: 1; /* Se pone delante de la luz */
+    background: rgb(31, 30, 30); /* Tu color original */
+    padding: 25px;
+    border-radius: 12px;
+    font-family: sans-serif;
+    color: white;
+}
+
+/* 4. Animación del borde */
+@keyframes fluir-colores {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Estilos internos para que se vea bien */
+.input-group { display: flex; gap: 10px; margin-top: 15px; }
+#resistenciasInput { 
+    padding: 10px; flex: 1; border-radius: 5px; border: 1px solid #444; 
+    background: #222; color: white; 
+}
+button { 
+    padding: 10px 20px; background: #28a745; color: white; 
+    border: none; border-radius: 5px; cursor: pointer; font-weight: bold;
+}
+#resultado { margin-top: 20px; font-weight: bold; }
+</style>
+<div id="calcespec" class="simulador-container">
+    <h4>Simulación del Circuito en Paralelo</h4>
+    <div class="circuito">
+        <div class="cable-entrada"></div>
+        <div class="nodos-paralelo">
+            <div class="rama">
+                <div class="resistencia-visual" id="vis-R1">R1</div>
+            </div>
+            <div class="rama">
+                <div class="resistencia-visual" id="vis-R2">R2</div>
+            </div>
+            <div class="rama">
+                <div class="resistencia-visual" id="vis-R3">R3</div>
+            </div>
+        </div>
+        <div class="cable-salida"></div>
+    </div>
+    <p id="info-simulacion">Escribe valores arriba para ver el flujo.</p>
+</div>
+<style>
+  .simulador-container {
+    background: #1e1e1e;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    margin-top: 30px;
+    color: white;
+    border: 1px solid #444;
+}
+
+.circuito {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    margin: 20px 0;
+}
+
+/* Cables horizontales */
+.cable-entrada, .cable-salida {
+    width: 50px;
+    height: 4px;
+    background: #00ff00; /* Color de energía */
+    box-shadow: 0 0 10px #00ff00;
+}
+
+/* El bloque donde se dividen las ramas */
+.nodos-paralelo {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 100%;
+    border-left: 4px solid #00ff00;
+    border-right: 4px solid #00ff00;
+    padding: 0 20px;
+}
+
+.rama {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 2px;
+    background: #00ff00;
+    position: relative;
+}
+
+/* El rectángulo de la resistencia */
+.resistencia-visual {
+    width: 40px;
+    height: 20px;
+    background: #333;
+    border: 2px solid #fff;
+    color: #fff;
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+    transition: all 0.3s ease;
+}
+
+/* Animación de flujo (opcional) */
+.cable-entrada, .rama, .cable-salida {
+    animation: brillo-flujo 1.5s infinite alternate;
+}
+
+@keyframes brillo-flujo {
+    from { opacity: 0.6; }
+    to { opacity: 1; box-shadow: 0 0 15px #00ff00; }
+}
+#calcespec {
+    box-shadow: 0 0 45px rgba(0, 255, 0, 0.3) !important;
+}
+</style>
+</body>
+</html>
