@@ -86,13 +86,13 @@
 
   /* 1. Estilo para los Pasos (Arriba, borde gris sólido) */
   .pasos-superiores {
-    border: 2px solid #555; 
+    border: 2px solid #313030; 
     border-radius: 12px;
-    padding: 20px;
-    margin: 40px auto 20px auto;
+    padding: 30px;
+    margin: 20px auto 20px auto;
     max-width: 1000px;
     background: #111;
-    width: 90%;
+    width: 100%;
     color: white;
     box-sizing: border-box;
   }
@@ -121,7 +121,7 @@
   .wrapper-neon::before {
     content: ''; position: absolute; top: -150%; left: -150%; width: 400%; height: 400%;
     background: conic-gradient(#ff0000, #ffff00, #00ff00, #00ffff, #0000ff, #ff00ff, #ff0000);
-    animation: fluir-colores 4s linear infinite;
+    animation: fluir-colores 2s linear infinite;
   }
   @keyframes fluir-colores { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
@@ -283,11 +283,12 @@
   </div>
 
   <div class="pasos-superiores">
-    <h3 style="color: #00ff00; margin-top: 0;">🚀 Pasos para usar la Calculadora</h3>
+    <h2 style="color: #00ff00; margin-top: 0;">🚀 Pasos para usar la Calculadora:</h2>
     <ul style="color: white; list-style: none; padding: 0;">
-        <li>1. Ingresa las resistencias separadas por comas (ej: 100, 200).</li>
-        <li>2. Haz clic en "Calcular RT".</li>
-        <li>3. Mira el diagrama de la derecha para ver los valores aplicados.</li>
+        <li>1. No puedes ingresar valores menores a 0.</li>
+        <li>2. Ingresa las resistencias separadas por comas (ej: 100, 200).</li>
+        <li>3. Haz clic en "Calcular RT".</li>
+        <li>4. Mira el diagrama de la derecha para ver los valores aplicados.</li>
     </ul>
   </div>
 
@@ -296,7 +297,7 @@
       <div class="wrapper-neon">
           <div class="calculadora-neon">
               <h3>🧮 Calculadora de Resistencia en Paralelo</h3>
-              <p>Ingresa los valores de las resistencias (separados por comas):</p>
+              <p>Por favor, ingresa los valores de las resistencias (separados por comas):</p>
               
               <div class="input-group">
                   <input type="text" id="resistenciasInput" placeholder="Ejemplo: 10, 20, 30">
