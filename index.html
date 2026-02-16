@@ -131,7 +131,7 @@
     position: relative;
     z-index: 1;
     background: rgb(31, 30, 30);
-    padding: 25px;
+    padding: 15px;
     border-radius: 12px;
     display: flex;
     flex-direction: column;
@@ -147,13 +147,14 @@
 .simulador-container {
     flex: 1;
     background: #1e1e1e;
-    padding: 25px;
+    padding: 20px; /* Espacio interno uniforme */
     border-radius: 15px;
-    border: 1px solid #444;
-    box-shadow: 0 0 40px rgba(0, 255, 0, 0.25);
+    border: 1px solid #8a2be2; /* Tu borde morado */
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Centra el diagrama verticalmente */
+    justify-content: flex-start; /* IMPORTANTE: Alinea arriba, no al centro */
+    align-items: center;
+    margin-bottom: 20px !important; /* El espacio que deja hacia abajo */
 }
   .circuito-sim { display: flex; align-items: center; justify-content: center; height: 200px; margin: 20px 0; }
   .cable-entrada, .cable-salida { width: 50px; height: 4px; background: #00ff00; box-shadow: 0 0 10px #00ff00; }
@@ -382,6 +383,87 @@
       }
     }
   </script>
+<div class="seccion-casos">
+    <h1 class="titulo-casos">Aplicaciones en el Mundo Real</h1>
+    <div class="contenedor-casos">
+        
+        <div class="tarjeta-caso">
+            <div class="icono-caso">🏠</div>
+            <h4>Instalaciones Domésticas</h4>
+            <p>En tu casa, todos los enchufes y luces están en paralelo. Gracias a esto, puedes apagar la televisión sin que se apague el refrigerador.</p>
+        </div>
 
+        <div class="tarjeta-caso">
+            <div class="icono-caso">🏙️</div>
+            <h4>Alumbrado Público</h4>
+            <p>Si una farola de la calle se funde, las demás siguen iluminando el camino. Imagina el caos si una sola bombilla fundida apagara toda la ciudad.</p>
+        </div>
+
+        <div class="tarjeta-caso">
+            <div class="icono-caso">📱</div>
+            <h4>Dispositivos Electrónicos</h4>
+            <p>Tu celular usa circuitos en paralelo para alimentar la pantalla, el procesador y el altavoz al mismo tiempo con un voltaje constante de la batería.</p>
+        </div>
+
+    </div>
+</div>
+<style>
+    .seccion-casos {
+    width: 90%;
+    max-width: 1100px;
+    margin: 0 auto; /* Centrado horizontal */
+    padding-top: 20px;    /* IGUAL QUE EL MARGIN-BOTTOM DE ARRIBA */
+    padding-bottom: 40px; /* Espacio hacia lo que pongas después */
+    text-align: center;
+}
+
+.titulo-casos {
+    color: #d630ff;
+    margin-top: 0; /* Mata el margen invisible del título */
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.contenedor-casos {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+    flex-wrap: wrap; 
+}
+
+.tarjeta-caso {
+    background: #1d1d1d;
+    border: 1px solid #8a2be2;
+    border-radius: 15px;
+    padding: 25px;
+    flex: 1;
+    min-width: 280px;
+    transition: transform 0.3s, border-color 0.3s;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.tarjeta-caso:hover {
+    transform: translateY(-10px);
+    border-color: #bf00ff;
+    box-shadow: 0 0 30px rgba(114, 8, 201, 0.644);
+}
+
+.icono-caso {
+    font-size: 40px;
+    margin-bottom: 15px;
+}
+
+.tarjeta-caso h4 {
+    color: #ffffff;
+    margin-bottom: 10px;
+    font-size: 1.2em;
+}
+
+.tarjeta-caso p {
+    font-size: 0.95em;
+    line-height: 1.5;
+    color: #ffffff;
+}
+</style>
 </body>
 </html>
