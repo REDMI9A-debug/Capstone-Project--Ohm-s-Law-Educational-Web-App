@@ -1,0 +1,258 @@
+
+  :root {
+    --wire-off: #444;
+    --wire-on: #00ff00;
+    --bulb-off: #555;
+    --bulb-on: #ffeb3b;
+  }
+
+  body {
+    background: linear-gradient(35deg, #000000, #414345);     
+    color: #e0e0e0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    margin: 0;
+  }
+
+  .header {
+    text-align: center;
+    max-width: 650px;
+    margin-bottom: 20px;
+  }
+
+  h1 { color: var(--wire-on); text-transform: uppercase; }
+
+  /* ESTILOS DEL CIRCUITO DE ARRIBA (VISUALIZACIÓN) */
+  .circuit-container {
+    display: flex;
+    align-items: center;
+    background: #1e1e1e;
+    padding: 50px;
+    border-radius: 15px;
+    border: 1px solid #333;
+    position: relative;
+    margin-bottom: 20px;
+  }
+
+  .label {
+    position: absolute;
+    font-size: 12px;
+    background: rgba(0, 0, 0, 0.219);
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: #aaa;
+  }
+
+  .wire-rail { height: 4px; background: var(--wire-off); transition: background 0.3s; }
+  .power-side { width: 60px; height: 180px; border: 4px solid var(--wire-off); border-right: none; border-radius: 10px 0 0 10px; position: relative; transition: all 0.3s; }
+  .battery { width: 40px; height: 60px; background: #333; border: 2px solid #888; position: absolute; left: -22px; top: 60px; display: flex; align-items: center; justify-content: center; font-weight: bold; }
+  .branch { width: 120px; height: 180px; border-top: 4px solid var(--wire-off); border-bottom: 4px solid var(--wire-off); display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative; transition: all 0.3s; }
+  .vertical-wire { width: 4px; height: 100%; background: var(--wire-off); position: absolute; transition: background 0.3s; }
+  .bulb { width: 45px; height: 45px; background: var(--bulb-off); border-radius: 50%; border: 2px solid #777; z-index: 2; transition: all 0.3s; box-shadow: inset 0 0 10px rgba(131, 126, 126, 0.5); }
+  .circuit-end { width: 30px; height: 180px; border: 4px solid var(--wire-off); border-left: none; border-radius: 0 10px 10px 0; transition: all 0.3s; }
+
+  /* ESTADOS ACTIVOS DEL CIRCUITO SUPERIOR */
+  body.on .power-side, body.on .branch, body.on .circuit-end { border-color: var(--wire-on); box-shadow: 0 0 5px rgba(56, 56, 56, 0.918); }
+  body.on .vertical-wire { background: var(--wire-on); }
+  body.on .bulb { background: var(--bulb-on); border-color: #ffffff; box-shadow: 0 0 30px var(--bulb-on), 0 0 10px rgb(255, 251, 5); }
+
+  button.toggle-btn { margin-top: 20px; padding: 10px 20px; font-size: 15px; font-weight: bold; cursor: pointer; background: var(--wire-on); border: none; border-radius: 10px; color: #000000; transition: transform 0.2s; }
+  button.toggle-btn:active { transform: scale(0.90); filter: brightness(0.8); }
+
+  /* SECCIONES INFORMATIVAS */
+  .info-box { text-align: center; margin-top: 20px; background: #1e1e1e; border-radius: 10px; padding: 20px; color: white; display: block; max-width: 700px; }
+  
+  .dashboard-tool-bar { display: flex; gap: 15px; justify-content: center; margin-top: 20px; flex-wrap: wrap; }
+  
+  .subtheme-card { display: flex; flex-direction: column; align-items: center; background-color: #2a2a2a; padding: 12px 20px; border-radius: 8px; border: 1px solid #444; min-width: 80px; transition: transform 0.2s; text-align: center; color: white; }
+  .subtheme-card:hover { transform: translateY(-3px); background-color: #333; }
+  .subtheme-icon { font-size: 22px; margin-bottom: 8px; }
+  
+  .seccion-info { display: flex; justify-content: space-between; align-items: center; width: 90%; max-width: 1000px; margin: 15px auto; background-color: #1a1919; padding: 25px; border-radius: 10px; border: 3px solid #333; flex-wrap: wrap; gap: 20px; }
+  .texto-contenido { flex: 1; text-align: left; color: white; min-width: 300px; }
+  .seccion-info img { border-radius: 5px; background-color: rgba(54, 54, 54, 0.123); padding: 5px; max-width: 100%; height: auto; }
+
+  /* ----------------------------------------------------------- */
+  /* DASHBOARD Y CALCULADORA                                     */
+  /* ----------------------------------------------------------- */
+
+  .pasos-superiores {
+    border: 2px solid #313030; 
+    border-radius: 12px;
+    padding: 30px;
+    margin: 20px auto 20px auto;
+    max-width: 1000px;
+    background: #111;
+    width: 100%;
+    color: white;
+    box-sizing: border-box;
+  }
+
+.seccion-dashboard {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: stretch;
+    gap: 30px;
+    width: 95%;
+    max-width: 1200px;
+    /* AJUSTE: Eliminamos el margen de abajo para controlar el espacio desde la siguiente sección */
+    margin-bottom: 0; 
+}
+
+.wrapper-neon {
+    display: flex;
+    flex: 1;
+    min-width: 320px;
+    position: relative;
+    padding: 3px;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+  .wrapper-neon::before {
+    content: ''; position: absolute; top: -150%; left: -150%; width: 400%; height: 400%;
+    background: conic-gradient(#ff0000, #ffff00, #00ff00, #00ffff, #0000ff, #ff00ff, #ff0000);
+    animation: fluir-colores 2s linear infinite;
+  }
+  @keyframes fluir-colores { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+.calculadora-neon {
+    flex: 1;
+    position: relative;
+    z-index: 1;
+    background: rgb(31, 30, 30);
+    padding: 15px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+  .input-group { display: flex; gap: 10px; margin-top: 15px; }
+  #resistenciasInput { padding: 10px; flex: 1; border-radius: 5px; border: 1px solid #444; background: #222; color: white; }
+  .btn-calc { padding: 10px 20px; background: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; }
+  #resultado { margin-top: 20px; font-weight: bold; }
+
+/* AJUSTE DEL SIMULADOR PARA ELIMINAR EL ESPACIO FANTASMA */
+.simulador-container {
+    flex: 1;
+    background: #1e1e1e;
+    padding: 20px;
+    border-radius: 15px;
+    border: 1px solid #15ff00;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Alineamos arriba */
+    align-items: center;
+    margin-bottom: 0 !important; /* Quitamos el empuje hacia abajo */
+
+    /* --- AQUÍ ESTÁ EL TRUCO DEL RESPLANDOR --- */
+    position: relative; 
+    /* Creamos un brillo inicial */
+    box-shadow: 0 0 15px rgb(81, 255, 0); 
+    /* Llamamos a la animación que crearemos abajo */
+    animation: resplandor-neon 3s infinite alternate; 
+
+    /* Esta es la animación que hace que la luz "viva" detrás del cuadro */
+@keyframes resplandor-neon {
+    from {
+        box-shadow: 0 0 10px rgba(138, 43, 226, 0.4), 
+                    0 0 20px rgba(138, 43, 226, 0.2);
+    }
+    to {
+        box-shadow: 0 0 25px rgba(138, 43, 226, 0.7), 
+                    0 0 50px rgba(138, 43, 226, 0.3);
+    }
+}
+}
+  .circuito-sim { display: flex; align-items: center; justify-content: center; height: 200px; margin: 20px 0; }
+  .cable-entrada, .cable-salida { width: 50px; height: 4px; background: #00ff00; box-shadow: 0 0 10px #00ff00; }
+  .nodos-paralelo { display: flex; flex-direction: column; justify-content: space-around; height: 100%; border-left: 4px solid #00ff00; border-right: 4px solid #00ff00; padding: 0 20px; }
+  .rama-sim { display: flex; align-items: center; justify-content: center; width: 100px; height: 2px; background: #00ff00; position: relative; }
+  .resistencia-visual { width: 40px; height: 20px; background: #333; border: 2px solid #fff; color: #fff; font-size: 10px; display: flex; align-items: center; justify-content: center; z-index: 5; transition: all 0.3s ease; }
+  
+  .cable-entrada, .rama-sim, .cable-salida { animation: brillo-flujo 1.5s infinite alternate; }
+  @keyframes brillo-flujo { from { opacity: 0.6; } to { opacity: 1; box-shadow: 0 0 15px #00ff00; } }
+
+  @media (max-width: 850px) {
+    .seccion-dashboard { flex-direction: column; align-items: center; }
+    .wrapper-neon, .simulador-container { width: 100%; }
+    .seccion-info { flex-direction: column; text-align: center; }
+    .texto-contenido { margin-right: 0; margin-bottom: 20px; }
+  }
+
+  /* ----------------------------------------------------------- */
+  /* AJUSTE FINAL DE SIMETRÍA (30PX ARRIBA Y ABAJO)              */
+  /* ----------------------------------------------------------- */
+  .seccion-casos {
+    width: 90%;
+    max-width: 1100px;
+    margin: 0 auto;
+    /* 30px exactos arriba y abajo del contenedor */
+    padding-top: 50px;    
+    padding-bottom: 50px; 
+    text-align: center;
+  }
+
+  .titulo-casos {
+    color: #00ff00;
+    /* Eliminamos márgenes para que solo manden los 30px del padding */
+    margin-top: 0; 
+    margin-bottom: 30px; /* Espacio hacia las tarjetas */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .contenedor-casos {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+    flex-wrap: wrap; 
+  }
+
+  .tarjeta-caso {
+    background: #1d1d1d;
+    border: 1px solid #00ff00;
+    border-radius: 15px;
+    padding: 25px;
+    flex: 1;
+    min-width: 280px;
+    transition: transform 0.3s, border-color 0.3s;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  }
+
+  .tarjeta-caso:hover {
+    transform: translateY(-10px);
+    border-color: #00ff00;
+    box-shadow: 0 0 30px rgb(30, 255, 0);
+  }
+
+  .icono-caso { font-size: 40px; margin-bottom: 15px; }
+  .tarjeta-caso h4 { color: #ffffff; margin-bottom: 10px; font-size: 1.2em; }
+  .tarjeta-caso p { font-size: 0.95em; line-height: 1.5; color: #ffffff; }
+
+/* 1. Definimos la transición para que el movimiento sea fluido en todos estos elementos */
+.wrapper-neon, 
+.seccion-info, 
+.tarjeta-caso, 
+.subtheme-card, 
+.pasos-superiores,
+.simulador-container {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* 2. Definimos el efecto de alzada al pasar el mouse (:hover) */
+/* NOTA: No incluimos .circuit-container ni .simulador-container por tu petición */
+.wrapper-neon:hover, 
+.seccion-info:hover, 
+.tarjeta-caso:hover, 
+.subtheme-card:hover, 
+.pasos-superiores:hover,
+.simulador-container:hover {
+    transform: translateY(-5px); /* Se eleva 10 píxeles */
+    box-shadow: 0 10 25px rgba(0, 0, 0, 0.4);
+}
