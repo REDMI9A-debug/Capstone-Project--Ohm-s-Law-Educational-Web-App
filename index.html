@@ -67,7 +67,7 @@
   button.toggle-btn { margin-top: 20px; padding: 10px 20px; font-size: 15px; font-weight: bold; cursor: pointer; background: var(--wire-on); border: none; border-radius: 10px; color: #000000; transition: transform 0.2s; }
   button.toggle-btn:active { transform: scale(0.90); filter: brightness(0.8); }
 
-  /* SECCIONES INFORMATIVAS (TUS ESTILOS ORIGINALES) */
+  /* SECCIONES INFORMATIVAS */
   .info-box { text-align: center; margin-top: 20px; background: #1e1e1e; border-radius: 10px; padding: 20px; color: white; display: block; max-width: 700px; }
   
   .dashboard-tool-bar { display: flex; gap: 15px; justify-content: center; margin-top: 20px; flex-wrap: wrap; }
@@ -76,15 +76,14 @@
   .subtheme-card:hover { transform: translateY(-3px); background-color: #333; }
   .subtheme-icon { font-size: 22px; margin-bottom: 8px; }
   
-  .seccion-info { display: flex; justify-content: space-between; align-items: center; width: 90%; max-width: 1000px; margin: 30px auto; background-color: #1a1919; padding: 25px; border-radius: 10px; border: 3px solid #333; flex-wrap: wrap; gap: 20px; }
+  .seccion-info { display: flex; justify-content: space-between; align-items: center; width: 90%; max-width: 1000px; margin: 15px auto; background-color: #1a1919; padding: 25px; border-radius: 10px; border: 3px solid #333; flex-wrap: wrap; gap: 20px; }
   .texto-contenido { flex: 1; text-align: left; color: white; min-width: 300px; }
   .seccion-info img { border-radius: 5px; background-color: rgba(54, 54, 54, 0.123); padding: 5px; max-width: 100%; height: auto; }
 
   /* ----------------------------------------------------------- */
-  /* AQUI EMPIEZA LA MAGIA DE TU NUEVO DISEÑO (DASHBOARD)        */
+  /* DASHBOARD Y CALCULADORA                                     */
   /* ----------------------------------------------------------- */
 
-  /* 1. Estilo para los Pasos (Arriba, borde gris sólido) */
   .pasos-superiores {
     border: 2px solid #313030; 
     border-radius: 12px;
@@ -96,20 +95,21 @@
     color: white;
     box-sizing: border-box;
   }
-/* El contenedor que los envuelve */
+
 .seccion-dashboard {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    align-items: stretch; /* ESTO hace que ambos tengan la misma altura */
+    align-items: stretch;
     gap: 30px;
     width: 95%;
     max-width: 1200px;
-    margin-bottom: 50px;
+    /* AJUSTE: Eliminamos el margen de abajo para controlar el espacio desde la siguiente sección */
+    margin-bottom: 0; 
 }
-/* La calculadora */
+
 .wrapper-neon {
-    display: flex; /* Para que el hijo interno también se estire */
+    display: flex;
     flex: 1;
     min-width: 320px;
     position: relative;
@@ -125,9 +125,8 @@
   }
   @keyframes fluir-colores { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
-  /* El interior de la calculadora */
 .calculadora-neon {
-    flex: 1; /* Esto obliga al fondo gris a llenar todo el borde neón */
+    flex: 1;
     position: relative;
     z-index: 1;
     background: rgb(31, 30, 30);
@@ -135,7 +134,7 @@
     border-radius: 12px;
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Centra el contenido verticalmente */
+    justify-content: center;
 }
 
   .input-group { display: flex; gap: 10px; margin-top: 15px; }
@@ -143,18 +142,37 @@
   .btn-calc { padding: 10px 20px; background: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; }
   #resultado { margin-top: 20px; font-weight: bold; }
 
-  /* El diagrama */
+/* AJUSTE DEL SIMULADOR PARA ELIMINAR EL ESPACIO FANTASMA */
 .simulador-container {
     flex: 1;
     background: #1e1e1e;
-    padding: 20px; /* Espacio interno uniforme */
+    padding: 20px;
     border-radius: 15px;
-    border: 1px solid #8a2be2; /* Tu borde morado */
+    border: 1px solid #15ff00;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start; /* IMPORTANTE: Alinea arriba, no al centro */
+    justify-content: flex-start; /* Alineamos arriba */
     align-items: center;
-    margin-bottom: 20px !important; /* El espacio que deja hacia abajo */
+    margin-bottom: 0 !important; /* Quitamos el empuje hacia abajo */
+
+    /* --- AQUÍ ESTÁ EL TRUCO DEL RESPLANDOR --- */
+    position: relative; 
+    /* Creamos un brillo inicial */
+    box-shadow: 0 0 15px rgb(81, 255, 0); 
+    /* Llamamos a la animación que crearemos abajo */
+    animation: resplandor-neon 3s infinite alternate; 
+
+    /* Esta es la animación que hace que la luz "viva" detrás del cuadro */
+@keyframes resplandor-neon {
+    from {
+        box-shadow: 0 0 10px rgba(138, 43, 226, 0.4), 
+                    0 0 20px rgba(138, 43, 226, 0.2);
+    }
+    to {
+        box-shadow: 0 0 25px rgba(138, 43, 226, 0.7), 
+                    0 0 50px rgba(138, 43, 226, 0.3);
+    }
+}
 }
   .circuito-sim { display: flex; align-items: center; justify-content: center; height: 200px; margin: 20px 0; }
   .cable-entrada, .cable-salida { width: 50px; height: 4px; background: #00ff00; box-shadow: 0 0 10px #00ff00; }
@@ -162,17 +180,87 @@
   .rama-sim { display: flex; align-items: center; justify-content: center; width: 100px; height: 2px; background: #00ff00; position: relative; }
   .resistencia-visual { width: 40px; height: 20px; background: #333; border: 2px solid #fff; color: #fff; font-size: 10px; display: flex; align-items: center; justify-content: center; z-index: 5; transition: all 0.3s ease; }
   
-  /* Animación flujo */
   .cable-entrada, .rama-sim, .cable-salida { animation: brillo-flujo 1.5s infinite alternate; }
   @keyframes brillo-flujo { from { opacity: 0.6; } to { opacity: 1; box-shadow: 0 0 15px #00ff00; } }
 
-  /* RESPONSIVE: En celular se pone uno abajo del otro */
   @media (max-width: 850px) {
     .seccion-dashboard { flex-direction: column; align-items: center; }
     .wrapper-neon, .simulador-container { width: 100%; }
     .seccion-info { flex-direction: column; text-align: center; }
     .texto-contenido { margin-right: 0; margin-bottom: 20px; }
   }
+
+  /* ----------------------------------------------------------- */
+  /* AJUSTE FINAL DE SIMETRÍA (30PX ARRIBA Y ABAJO)              */
+  /* ----------------------------------------------------------- */
+  .seccion-casos {
+    width: 90%;
+    max-width: 1100px;
+    margin: 0 auto;
+    /* 30px exactos arriba y abajo del contenedor */
+    padding-top: 50px;    
+    padding-bottom: 50px; 
+    text-align: center;
+  }
+
+  .titulo-casos {
+    color: #00ff00;
+    /* Eliminamos márgenes para que solo manden los 30px del padding */
+    margin-top: 0; 
+    margin-bottom: 30px; /* Espacio hacia las tarjetas */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .contenedor-casos {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+    flex-wrap: wrap; 
+  }
+
+  .tarjeta-caso {
+    background: #1d1d1d;
+    border: 1px solid #00ff00;
+    border-radius: 15px;
+    padding: 25px;
+    flex: 1;
+    min-width: 280px;
+    transition: transform 0.3s, border-color 0.3s;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  }
+
+  .tarjeta-caso:hover {
+    transform: translateY(-10px);
+    border-color: #00ff00;
+    box-shadow: 0 0 30px rgb(30, 255, 0);
+  }
+
+  .icono-caso { font-size: 40px; margin-bottom: 15px; }
+  .tarjeta-caso h4 { color: #ffffff; margin-bottom: 10px; font-size: 1.2em; }
+  .tarjeta-caso p { font-size: 0.95em; line-height: 1.5; color: #ffffff; }
+
+/* 1. Definimos la transición para que el movimiento sea fluido en todos estos elementos */
+.wrapper-neon, 
+.seccion-info, 
+.tarjeta-caso, 
+.subtheme-card, 
+.pasos-superiores,
+.simulador-container {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* 2. Definimos el efecto de alzada al pasar el mouse (:hover) */
+/* NOTA: No incluimos .circuit-container ni .simulador-container por tu petición */
+.wrapper-neon:hover, 
+.seccion-info:hover, 
+.tarjeta-caso:hover, 
+.subtheme-card:hover, 
+.pasos-superiores:hover,
+.simulador-container:hover {
+    transform: translateY(-5px); /* Se eleva 10 píxeles */
+    box-shadow: 0 10 25px rgba(0, 0, 0, 0.4);
+}
 </style>
 </head>
 <body>
@@ -220,15 +308,7 @@
   <div class="seccion-info">
     <div class="texto-contenido">
         <h3>¿Qué es la Corriente Total (I<sub>t</sub>)?</h3>
-        <p>
-            En un circuito en paralelo, la corriente total es la suma de las corrientes que circulan por cada una de las ramas o componentes individuales. 
-            Imagina que el circuito es una tubería principal que se divide en varias mangueras; la cantidad de agua que sale de la fuente es igual a la suma del agua que pasa por todas las mangueras.
-        </p>
-
-        <h3>¿Cómo se calcula?</h3>
-        <p>Para obtenerla, existen dos formas principales dependiendo de los datos que tengas:</p>
-        <p><strong>Por suma de ramas:</strong> Si conoces la corriente de cada componente, simplemente las sumas:</p>
-        
+        <p>En un circuito en paralelo, la corriente total es la suma de las corrientes que circulan por cada una de las ramas o componentes individuales.</p>
         <p style="color: #fff018; font-weight: bold; font-size: 1.2em;">
             I<sub>t</sub> = I<sub>1</sub> + I<sub>2</sub> + I<sub>3</sub> + ... + I<sub>n</sub>
         </p>
@@ -239,18 +319,9 @@
   <div class="seccion-info">
     <div class="texto-contenido">
         <h3>¿Qué es la Resistencia Total (R<sub>t</sub>)?</h3>
-        <p>
-            En un circuito en paralelo, la resistencia total (o equivalente) siempre es <strong>menor</strong> que la resistencia de la rama más pequeña. Esto sucede porque al haber más caminos para la corriente, la "dificultad" general para que esta fluya disminuye.
-        </p>
-        
-        <p><strong>Fórmula Clave:</strong></p>
+        <p>En un circuito en paralelo, la resistencia total siempre es menor que la de la rama más pequeña.</p>
         <p style="color: #fff018; font-weight: bold; font-size: 1.1em;">
             1 / R<sub>t</sub> = 1 / R<sub>1</sub> + 1 / R<sub>2</sub> + 1 / R<sub>3</sub> + ... + 1 / R<sub>n</sub>
-        </p>
-        
-        <p>
-            Para el caso especial de solo dos resistencias, puedes usar la fórmula simplificada: 
-            <em>R<sub>t</sub> = (R<sub>1</sub> * R<sub>2</sub>) / (R<sub>1</sub> + R<sub>2</sub>)</em>.
         </p>
     </div>
     <img src="resistenciatotal.png" width="250">
@@ -287,24 +358,19 @@
     <h2 style="color: #00ff00; margin-top: 0;">🚀 Pasos para usar la Calculadora:</h2>
     <ul style="color: white; list-style: none; padding: 0;">
         <li>1. No puedes ingresar valores menores a 0.</li>
-        <li>2. Ingresa las resistencias separadas por comas (ej: 100, 200).</li>
+        <li>2. Ingresa las resistencias separadas por comas.</li>
         <li>3. Haz clic en "Calcular RT".</li>
-        <li>4. Mira el diagrama de la derecha para ver los valores aplicados.</li>
     </ul>
   </div>
 
   <div class="seccion-dashboard">
-      
       <div class="wrapper-neon">
           <div class="calculadora-neon">
               <h3>🧮 Calculadora de Resistencia en Paralelo</h3>
-              <p>Por favor, ingresa los valores de las resistencias (separados por comas):</p>
-              
               <div class="input-group">
                   <input type="text" id="resistenciasInput" placeholder="Ejemplo: 10, 20, 30">
                   <button class="btn-calc" onclick="calcularParalelo()">Calcular RT</button>
               </div>
-
               <div id="resultado">Resultado: --</div>
           </div>
       </div>
@@ -314,156 +380,68 @@
           <div class="circuito-sim">
               <div class="cable-entrada"></div>
               <div class="nodos-paralelo">
-                  <div class="rama-sim">
-                      <div class="resistencia-visual" id="vis-R1">R1</div>
-                  </div>
-                  <div class="rama-sim">
-                      <div class="resistencia-visual" id="vis-R2">R2</div>
-                  </div>
-                  <div class="rama-sim">
-                      <div class="resistencia-visual" id="vis-R3">R3</div>
-                  </div>
+                  <div class="rama-sim"><div class="resistencia-visual" id="vis-R1">R1</div></div>
+                  <div class="rama-sim"><div class="resistencia-visual" id="vis-R2">R2</div></div>
+                  <div class="rama-sim"><div class="resistencia-visual" id="vis-R3">R3</div></div>
               </div>
               <div class="cable-salida"></div>
           </div>
           <p id="info-simulacion">Escribe valores arriba para ver el flujo.</p>
       </div>
-
   </div>
 
-  <script>
-    function calcularParalelo() {
-      // 1. Obtener valores
-      let input = document.getElementById("resistenciasInput").value;
-      let valores = input.split(',').map(v => v.trim()).filter(v => v !== "").map(Number);
-      
-      let sumaInversas = 0;
-      let error = false;
-
-      // 2. Limpiar simulador (Reset visual)
-      for (let i = 1; i <= 3; i++) {
-          let caja = document.getElementById("vis-R" + i);
-          if (caja) {
-              caja.innerText = "R" + i;
-              caja.style.color = "white";
-              caja.style.boxShadow = "none";
-              caja.style.borderColor = "white";
-          }
-      }
-
-      // 3. Calcular y actualizar Diagrama
-      valores.forEach((r, index) => {
-          if (r > 0 && index < 3) { // Solo procesamos hasta 3 resistencias para el dibujo
-              sumaInversas += (1 / r);
-              
-              let idVisual = "vis-R" + (index + 1);
-              let cajaVisual = document.getElementById(idVisual);
-              
-              if (cajaVisual) {
-                  cajaVisual.innerText = r + " Ω";
-                  cajaVisual.style.color = "#00ff00";
-                  cajaVisual.style.borderColor = "#00ff00";
-                  cajaVisual.style.boxShadow = "0 0 10px #00ff00";
-              }
-          } else if (r <= 0) {
-              error = true;
-          }
-      });
-
-      // 4. Mostrar Resultado
-      let resultadoDiv = document.getElementById("resultado");
-
-      if (error || valores.length === 0 || input === "") {
-          resultadoDiv.innerHTML = "❌ Ingresa números válidos (mayores a 0).";
-          resultadoDiv.style.color = "#ff4444";
-      } else {
-          let resistenciaTotal = 1 / sumaInversas;
-          resultadoDiv.innerHTML = "✅ Resistencia Total (R<sub>T</sub>): " + resistenciaTotal.toFixed(2) + " Ω";
-          resultadoDiv.style.color = "#007bff"; // Color azul/verde original
-      }
-    }
-  </script>
-<div class="seccion-casos">
+  <div class="seccion-casos">
     <h1 class="titulo-casos">Aplicaciones en el Mundo Real</h1>
     <div class="contenedor-casos">
-        
         <div class="tarjeta-caso">
             <div class="icono-caso">🏠</div>
             <h4>Instalaciones Domésticas</h4>
             <p>En tu casa, todos los enchufes y luces están en paralelo. Gracias a esto, puedes apagar la televisión sin que se apague el refrigerador.</p>
         </div>
-
         <div class="tarjeta-caso">
             <div class="icono-caso">🏙️</div>
             <h4>Alumbrado Público</h4>
-            <p>Si una farola de la calle se funde, las demás siguen iluminando el camino. Imagina el caos si una sola bombilla fundida apagara toda la ciudad.</p>
+            <p>Si una farola de la calle se funde, las demás siguen iluminando el camino.</p>
         </div>
-
         <div class="tarjeta-caso">
             <div class="icono-caso">📱</div>
             <h4>Dispositivos Electrónicos</h4>
-            <p>Tu celular usa circuitos en paralelo para alimentar la pantalla, el procesador y el altavoz al mismo tiempo con un voltaje constante de la batería.</p>
+            <p>Tu celular usa circuitos en paralelo para alimentar la pantalla, el procesador y el altavoz al mismo tiempo.</p>
         </div>
-
     </div>
-</div>
-<style>
-    .seccion-casos {
-    width: 90%;
-    max-width: 1100px;
-    margin: 0 auto; /* Centrado horizontal */
-    padding-top: 20px;    /* IGUAL QUE EL MARGIN-BOTTOM DE ARRIBA */
-    padding-bottom: 40px; /* Espacio hacia lo que pongas después */
-    text-align: center;
-}
+  </div>
 
-.titulo-casos {
-    color: #d630ff;
-    margin-top: 0; /* Mata el margen invisible del título */
-    margin-bottom: 30px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-.contenedor-casos {
-    display: flex;
-    justify-content: space-around;
-    gap: 20px;
-    flex-wrap: wrap; 
-}
+  <script>
+    function calcularParalelo() {
+      let input = document.getElementById("resistenciasInput").value;
+      let valores = input.split(',').map(v => v.trim()).filter(v => v !== "").map(Number);
+      let sumaInversas = 0;
+      let error = false;
 
-.tarjeta-caso {
-    background: #1d1d1d;
-    border: 1px solid #8a2be2;
-    border-radius: 15px;
-    padding: 25px;
-    flex: 1;
-    min-width: 280px;
-    transition: transform 0.3s, border-color 0.3s;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-}
+      for (let i = 1; i <= 3; i++) {
+          let caja = document.getElementById("vis-R" + i);
+          if (caja) { caja.innerText = "R" + i; caja.style.color = "white"; caja.style.boxShadow = "none"; caja.style.borderColor = "white"; }
+      }
 
-.tarjeta-caso:hover {
-    transform: translateY(-10px);
-    border-color: #bf00ff;
-    box-shadow: 0 0 30px rgba(114, 8, 201, 0.644);
-}
+      valores.forEach((r, index) => {
+          if (r > 0 && index < 3) {
+              sumaInversas += (1 / r);
+              let idVisual = "vis-R" + (index + 1);
+              let cajaVisual = document.getElementById(idVisual);
+              if (cajaVisual) { cajaVisual.innerText = r + " Ω"; cajaVisual.style.color = "#00ff00"; cajaVisual.style.borderColor = "#00ff00"; cajaVisual.style.boxShadow = "0 0 10px #00ff00"; }
+          } else if (r <= 0) { error = true; }
+      });
 
-.icono-caso {
-    font-size: 40px;
-    margin-bottom: 15px;
-}
-
-.tarjeta-caso h4 {
-    color: #ffffff;
-    margin-bottom: 10px;
-    font-size: 1.2em;
-}
-
-.tarjeta-caso p {
-    font-size: 0.95em;
-    line-height: 1.5;
-    color: #ffffff;
-}
-</style>
+      let resultadoDiv = document.getElementById("resultado");
+      if (error || valores.length === 0 || input === "") {
+          resultadoDiv.innerHTML = "❌ Ingresa números válidos.";
+          resultadoDiv.style.color = "#ff4444";
+      } else {
+          let resistenciaTotal = 1 / sumaInversas;
+          resultadoDiv.innerHTML = "✅ Resistencia Total (R<sub>T</sub>): " + resistenciaTotal.toFixed(2) + " Ω";
+          resultadoDiv.style.color = "#007bff";
+      }
+    }
+  </script>
 </body>
 </html>
