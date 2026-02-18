@@ -1,6 +1,6 @@
 
   
-  
+  /*licen esto hace que las propiedades que mayormente tienen los circuitos de esta pagina web tengan ese color apenas se especifique la propiedad-*/
   :root {
     --wire-off: #444;
     --wire-on: #00ff00;
@@ -19,7 +19,8 @@
     margin: 0;
     animation: fondoMetalico 15s ease infinite;
   }
-/* Animación del movimiento del fondo */
+/* el keyframe digamos "enlaza" el animation del body, encargado de animar el fondo de mi web,
+hace su trabajo con la propiedad de animacion en el body especificada "animation"*/
 @keyframes fondoMetalico {
     0% {
         background-position: 0% 50%;
@@ -39,7 +40,7 @@
 
   h1 { color: var(--wire-on); text-transform: uppercase; }
 
-  /* ESTILOS DEL CIRCUITO DE ARRIBA (VISUALIZACIÓN) */
+  /* ESTILOS DEL CIRCUITO DE ARRIBA AL INICIO LICEN */
   .circuit-container {
     display: flex;
     align-items: center;
@@ -68,7 +69,7 @@
   .bulb { width: 45px; height: 45px; background: var(--bulb-off); border-radius: 50%; border: 2px solid #777; z-index: 2; transition: all 0.3s; box-shadow: inset 0 0 10px rgba(131, 126, 126, 0.5); }
   .circuit-end { width: 30px; height: 180px; border: 4px solid var(--wire-off); border-left: none; border-radius: 0 10px 10px 0; transition: all 0.3s; }
 
-  /* ESTADOS ACTIVOS DEL CIRCUITO SUPERIOR */
+  /* estos son los que engloban mi circuito superior*/
   body.on .power-side, body.on .branch, body.on .circuit-end { border-color: var(--wire-on); box-shadow: 0 0 5px rgba(56, 56, 56, 0.918); }
   body.on .vertical-wire { background: var(--wire-on); }
   body.on .bulb { background: var(--bulb-on); border-color: #ffffff; box-shadow: 0 0 30px var(--bulb-on), 0 0 10px rgb(255, 251, 5); }
@@ -76,7 +77,7 @@
   button.toggle-btn { margin-top: 20px; padding: 10px 20px; font-size: 15px; font-weight: bold; cursor: pointer; background: var(--wire-on); border: none; border-radius: 10px; color: #000000; transition: transform 0.2s; }
   button.toggle-btn:active { transform: scale(0.90); filter: brightness(0.8); }
 
-  /* SECCIONES INFORMATIVAS */
+  /*esto engloba mis secciones informativas jeje*/
   .info-box { text-align: center; margin-top: 20px; background: #1e1e1e; border-radius: 10px; padding: 20px; color: rgb(255, 255, 255); display: block; max-width: 700px; }
   
   .dashboard-tool-bar { display: flex; gap: 15px; justify-content: center; margin-top: 20px; flex-wrap: wrap; }
@@ -90,7 +91,7 @@
   .seccion-info img { border-radius: 5px; background-color: rgba(54, 54, 54, 0.123); padding: 5px; max-width: 100%; height: auto; }
 
   /* ----------------------------------------------------------- */
-  /* DASHBOARD Y CALCULADORA                                     */
+  /* esta es mi aclculadora licen                                     */
   /* ----------------------------------------------------------- */
 
   .pasos-superiores {
@@ -113,7 +114,7 @@
     gap: 30px;
     width: 95%;
     max-width: 1200px;
-    /* AJUSTE: Eliminamos el margen de abajo para controlar el espacio desde la siguiente sección */
+    /* AJUSTE: se tuvo que eliminar espacio para que no me afecte a mi siguiente seccion licen */
     margin-bottom: 0; 
 }
 
@@ -164,14 +165,14 @@
     align-items: center;
     margin-bottom: 0 !important; /* Quitamos el empuje hacia abajo */
 
-    /* --- AQUÍ ESTÁ EL TRUCO DEL RESPLANDOR --- */
+    /*  RESPLANDOR*/
     position: relative; 
-    /* Creamos un brillo inicial */
+    /* brillo inicial */
     box-shadow: 0 0 15px rgb(81, 255, 0); 
     /* Llamamos a la animación que crearemos abajo */
     animation: resplandor-neon 3s infinite alternate; 
 
-    /* Esta es la animación que hace que la luz "viva" detrás del cuadro */
+    /* luz viva detras xd*/
 @keyframes resplandor-neon {
     from {
         box-shadow: 0 0 10px rgba(138, 43, 226, 0.4), 
@@ -192,8 +193,8 @@
   .cable-entrada, .rama-sim, .cable-salida { animation: brillo-flujo 1.5s infinite alternate; }
   @keyframes brillo-flujo { from { opacity: 0.6; } to { opacity: 1; box-shadow: 0 0 15px #00ff00; } }
  .seccion-dashboard {
-    /* ... tus otros estilos ... */
-    transition: all 0.3s ease; /* Esto hará que el borde rojo desaparezca suavemente */
+    /* mis otros estilos jeje   */
+    transition: all 0.3s ease; /* borde rojo en desaparecer xd */
 }
   @media (max-width: 850px) {
     .seccion-dashboard { flex-direction: column; align-items: center; }
@@ -203,13 +204,13 @@
   }
 
   /* ----------------------------------------------------------- */
-  /* AJUSTE FINAL DE SIMETRÍA (30PX ARRIBA Y ABAJO)              */
+  /* AJUSTE de mi SIMETRÍA   */
   /* ----------------------------------------------------------- */
   .seccion-casos {
     width: 90%;
     max-width: 1100px;
     margin: 0 auto;
-    /* 30px exactos arriba y abajo del contenedor */
+    /* 30px arriba y abajo de mi diseño */
     padding-top: 50px;    
     padding-bottom: 50px; 
     text-align: center;
@@ -217,9 +218,9 @@
 
   .titulo-casos {
     color: #00ff00;
-    /* Eliminamos márgenes para que solo manden los 30px del padding */
+    /* elimine el margin para que funcione el padding*/
     margin-top: 0; 
-    margin-bottom: 30px; /* Espacio hacia las tarjetas */
+    margin-bottom: 30px; /* Espacio hacia mis tarjetas */
     text-transform: uppercase;
     letter-spacing: 1px;
   }
@@ -252,7 +253,7 @@
   .tarjeta-caso h4 { color: #ffffff; margin-bottom: 10px; font-size: 1.2em; }
   .tarjeta-caso p { font-size: 0.95em; line-height: 1.5; color: #ffffff; }
 
-/* 1. Definimos la transición para que el movimiento sea fluido en todos estos elementos */
+/* 1. Defini la transición para que el movimiento sea fluido en todos estos elementos de mi web*/
 .wrapper-neon, 
 .seccion-info, 
 .tarjeta-caso, 
@@ -262,17 +263,16 @@
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* 2. Definimos el efecto de alzada al pasar el mouse (:hover) */
-/* NOTA: No incluimos .circuit-container ni .simulador-container por tu petición */
+/* 2. efecto de alzada al pasar el mouse (esto hace el :hover) */
 .wrapper-neon:hover, 
 .seccion-info:hover, 
 .tarjeta-caso:hover, 
 .subtheme-card:hover, 
 .pasos-superiores:hover,
 .simulador-container:hover{
-    transform: translateY(-5px); /* Se eleva 10 píxeles */
+    transform: translateY(-5px); /* Se eleva */
     box-shadow: 0 10 25px rgba(0, 0, 0, 0.4);
-}/* ARREGLO DE ESPACIADO PARA LA CALCULADORA */
+}/* espacio de mi calculadora */
 .volt-panel {
     background: rgba(255, 255, 255, 0.05);
     padding: 15px;
@@ -297,16 +297,16 @@
     min-height: 20px;
 }
 
-/* Evitar que las cajas verdes se encimen */
+/* Evitar que mis cajas verdes se encimen */
 .resistencia-visual {
     min-width: 50px;
     padding: 5px;
     text-align: center;
 }
 /* ----------------------------------------------------------- */
-/* MODULO DE EMERGENCIA (EFECTO EXPLOSIÓN)                    */
+/* efecto de explosion                   */
 /* ----------------------------------------------------------- */
-/* Vibración ligera exclusiva para el dashboard */
+/* Vibracion ligera exclusiva para el dashboard */
 .alerta-total {
     border: 2px solid #ff0000 !important;
     position: relative;
@@ -323,7 +323,7 @@
     100% { transform: translate(0px, 0px); }
 }
 
-/* Foco rojo sin sombras pesadas */
+/* foco r sin sombras pesadas */
 .foco-quemado {
     background-color: #ff0000 !important;
     box-shadow: 0 0 10px #ff0000 !important;
@@ -335,7 +335,7 @@
     50% { opacity: 0.5; }
     100% { opacity: 1; }
 }
-/* Animación de flujo eléctrico */
+/* flujo electrico */
 .cable-entrada, .cable-salida, .nodos-paralelo {
     transition: all 0.3s ease;
 }
@@ -345,7 +345,7 @@
     border-color: #00ff00 !important;
 }
 
-/* Efecto de partículas moviéndose (opcional pero pro) */
+/* Efecto de partículas moviéndose */
 @keyframes electricidad {
     0% { background-position: 0% 50%; }
     100% { background-position: 100% 50%; }
@@ -388,7 +388,7 @@
     margin-bottom: 10px;
 }
 /*hola vlo*/
-/* Contenedor Principal del Footer */
+/* Contenedor Principal para el footer que hize al final */
 .footer-maestro {
     margin-top: 80px;
     padding: 60px 20px;
@@ -404,17 +404,17 @@
     text-shadow: 0 0 10px rgba(255, 235, 59, 0.4);
 }
 
-/* Sistema de Columnas */
+/* Sistema de las Columnas */
 .columnas-finales {
     display: flex;
     gap: 30px;
     max-width: 1100px;
     margin: 0 auto;
-    flex-wrap: wrap; /* Para que en celular se pongan uno abajo del otro */
+    flex-wrap: wrap; /* Para que en celular se pongan uno abajo del otro, es decir mxwidth (lo quite)*/
 }
 
 .col-final {
-    flex: 1; /* Esto hace que ambos midan lo mismo */
+    flex: 1; /* ambos midan lo mimo */
     min-width: 300px;
     background: rgba(255, 255, 255, 0.03);
     padding: 30px;
@@ -488,36 +488,36 @@
 }
 .contenedor-final-imagen {
     display: flex;
-    flex-direction: column; /* Pone el texto arriba y la imagen abajo */
+    flex-direction: column; /* para mi texto arriba y la imagen abajo */
     align-items: center;    /* Centra todo horizontalmente */
     justify-content: center;
     margin: 40px auto;      /* Centra el contenedor y le da espacio */
-    max-width: 600px;       /* Ajusta este número al ancho que quieras para el texto */
+    max-width: 600px;       /* ajustable para el texto, no lo cambien a menos que si les guste jeje */
     text-align: center;
 }
 
 .texto-bendicion {
     font-size: 1.5em;
     color: #fff;
-    text-shadow: 0 0 10px rgba(0, 255, 255, 0.5); /* Un brillito azul como en tu captura */
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.5); 
     margin-bottom: 20px;
     width: 100%;            /* Ocupa todo el ancho del contenedor */
 }
 
 .imagen-final {
-    width: 100%;            /* La imagen se estira EXACTAMENTE al ancho del texto */
-    height: auto;           /* Mantiene la proporción para que no se vea aplastada */
-    border-radius: 15px;    /* Bordes redondeados para que se vea moderna */
+    width: 100%;            /*  mi img se estira exactly al ancho del texto */
+    height: auto;           /* Mantiene la proporcion para que no se vea aplastada */
+    border-radius: 15px;    /* Bordes redondeados para que se vea pro xd*/
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     border: 1px solid #333;
 }
-/* Contenedor que genera el resplandor general */
+/*  resplandor general */
 .aura-roja {
     position: relative;
     display: inline-block;
     line-height: 0; /* Quita espacios extraños bajo la imagen */
     border-radius: 15px;
-    /* Resplandor exterior (lejos de la imagen) */
+    /* Resplandor exterior */
     animation: resplandorTotal 3s infinite alternate;
 }
 
@@ -526,15 +526,15 @@
     max-width: 600px;
     height: auto;
     border-radius: 15px;
-    border: 3px solid #ff0000; /* Marco rojo sólido para la fuente de luz */
+    border: 3px solid #ff0000; /* Marco rojo solido para la fuente de luz */
     position: relative;
     z-index: 2;
-    /* Resplandor pegado al marco (neón) */
+    /* Resplandor pegado al marco neon */
     box-shadow: 0 0 10px #ff0000, 
                 0 0 30px #ff0000; 
 }
 
-/* Animación que hace que TODO el marco brille con fuerza */
+/* el marco brille con fuerza */
 @keyframes resplandorTotal {
     0% {
         box-shadow: 0 0 20px rgba(255, 0, 0, 0.4), 
@@ -545,11 +545,11 @@
         box-shadow: 0 0 0px rgba(255, 0, 0, 0.9), 
                     0 0 50px rgba(255, 0, 0, 0.6),
                     0 0 100px rgba(255, 0, 0, 0.3);
-        filter: brightness(1.2); /* La imagen también brilla un poco */
+        filter: brightness(1.2); /* La imagen tambi3n brilla */
     }
 }
 
-/* Opcional: Centrar el contenedor en la página */
+/* Centrar el contenedor en la página */
 .contenedor-final-imagen {
     text-align: center;
     margin: 50px auto;
@@ -559,8 +559,8 @@
     margin-top: 40px;
     padding: 20px;
     text-align: center;
-    border-top: 1px solid #222; /* Una línea muy sutil */
-    color: #555; /* Color gris oscuro para que no distraiga */
+    border-top: 1px solid #222; /* Una linea muy sutil */
+    color: #555; /* gris oscuro para que no distraiga */
     font-size: 12px;
     letter-spacing: 1px;
     text-transform: uppercase;
@@ -573,9 +573,9 @@
     font-style: normal;
 }
 
-/* Un pequeño detalle: que tu nombre brille un poco al pasar el mouse */
+/* que mi nombre brille un poco al pasar el mouse */
 .tagline:hover {
-    color: #ffeb3b; /* Amarillo como tu trivia */
+    color: #ffeb3b; /* Amarillo como mi trivia */
     text-shadow: 0 0 5px rgba(255, 235, 59, 0.5);
     transition: 0.3s;
 }

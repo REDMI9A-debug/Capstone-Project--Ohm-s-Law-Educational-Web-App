@@ -72,7 +72,7 @@ if (input === "") {
         let corriente = volt / rt;
 // Actualiza la fórmula dinámica con los datos reales
 document.getElementById("formula-dinamica").innerText = `${corriente.toFixed(2)}A = ${volt}V / ${rt.toFixed(2)}Ω`;
-    // --- MÓDULO DE SEGURIDAD ECONÓMICO ---
+    // --- MÓDULO DE SEGURIDAD ECONOMICO ---
         const dashboard = document.querySelector('.seccion-dashboard'); 
         
         if (corriente > 20) { 
@@ -94,7 +94,7 @@ document.getElementById("formula-dinamica").innerText = `${corriente.toFixed(2)}
         else if (corriente < 10) consumoDiv.innerText = "📺 Consumo: Medio (Como una TV)";
         else consumoDiv.innerText = "⚡ Consumo: ALTO (Como una Plancha)";
 
-        // Brillo de bombillos (Solo si no está explotando)
+        // Brillo de bombillos (Solo si no esta explotando)
         if (corriente <= 20) {
             let brillo = Math.min(50, corriente * 4);
             bombillos.forEach(b => {
