@@ -1,4 +1,6 @@
 
+  
+  
   :root {
     --wire-off: #444;
     --wire-on: #00ff00;
@@ -7,16 +9,28 @@
   }
 
   body {
-    background: linear-gradient(35deg, #000000, #414345);     
-    color: #e0e0e0;
+    background: linear-gradient(-45deg, #000000, #1a1a1a, #474545, #111111);
+    color: white;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
+    padding: 0;
     margin: 0;
+    animation: fondoMetalico 15s ease infinite;
   }
-
+/* Animación del movimiento del fondo */
+@keyframes fondoMetalico {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
   .header {
     text-align: center;
     max-width: 650px;
