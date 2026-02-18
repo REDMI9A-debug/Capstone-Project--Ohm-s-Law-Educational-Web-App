@@ -2,8 +2,8 @@
   :root {
     --wire-off: #444;
     --wire-on: #00ff00;
-    --bulb-off: #555;
-    --bulb-on: #ffeb3b;
+    --bulb-off: #3a3838;
+    --bulb-on: #ffee01;
   }
 
   body {
@@ -30,7 +30,7 @@
     display: flex;
     align-items: center;
     background: #1e1e1e;
-    padding: 50px;
+    padding: 60px;
     border-radius: 15px;
     border: 1px solid #333;
     position: relative;
@@ -43,7 +43,7 @@
     background: rgba(0, 0, 0, 0.219);
     padding: 2px 6px;
     border-radius: 4px;
-    color: #aaa;
+    color: #242424;
   }
 
   .wire-rail { height: 4px; background: var(--wire-off); transition: background 0.3s; }
@@ -63,7 +63,7 @@
   button.toggle-btn:active { transform: scale(0.90); filter: brightness(0.8); }
 
   /* SECCIONES INFORMATIVAS */
-  .info-box { text-align: center; margin-top: 20px; background: #1e1e1e; border-radius: 10px; padding: 20px; color: white; display: block; max-width: 700px; }
+  .info-box { text-align: center; margin-top: 20px; background: #1e1e1e; border-radius: 10px; padding: 20px; color: rgb(255, 255, 255); display: block; max-width: 700px; }
   
   .dashboard-tool-bar { display: flex; gap: 15px; justify-content: center; margin-top: 20px; flex-wrap: wrap; }
   
@@ -72,7 +72,7 @@
   .subtheme-icon { font-size: 22px; margin-bottom: 8px; }
   
   .seccion-info { display: flex; justify-content: space-between; align-items: center; width: 90%; max-width: 1000px; margin: 15px auto; background-color: #1a1919; padding: 25px; border-radius: 10px; border: 3px solid #333; flex-wrap: wrap; gap: 20px; }
-  .texto-contenido { flex: 1; text-align: left; color: white; min-width: 300px; }
+  .texto-contenido { flex: 1; text-align: left; color: rgb(255, 255, 255); min-width: 300px; }
   .seccion-info img { border-radius: 5px; background-color: rgba(54, 54, 54, 0.123); padding: 5px; max-width: 100%; height: auto; }
 
   /* ----------------------------------------------------------- */
@@ -125,7 +125,7 @@
     position: relative;
     z-index: 1;
     background: rgb(31, 30, 30);
-    padding: 15px;
+    padding: 30px;
     border-radius: 12px;
     display: flex;
     flex-direction: column;
@@ -177,7 +177,10 @@
   
   .cable-entrada, .rama-sim, .cable-salida { animation: brillo-flujo 1.5s infinite alternate; }
   @keyframes brillo-flujo { from { opacity: 0.6; } to { opacity: 1; box-shadow: 0 0 15px #00ff00; } }
-
+ .seccion-dashboard {
+    /* ... tus otros estilos ... */
+    transition: all 0.3s ease; /* Esto hará que el borde rojo desaparezca suavemente */
+}
   @media (max-width: 850px) {
     .seccion-dashboard { flex-direction: column; align-items: center; }
     .wrapper-neon, .simulador-container { width: 100%; }
@@ -241,7 +244,8 @@
 .tarjeta-caso, 
 .subtheme-card, 
 .pasos-superiores,
-.simulador-container {
+.simulador-container,
+.contenedor-trivia {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -252,7 +256,121 @@
 .tarjeta-caso:hover, 
 .subtheme-card:hover, 
 .pasos-superiores:hover,
-.simulador-container:hover {
+.simulador-container:hover{
     transform: translateY(-5px); /* Se eleva 10 píxeles */
     box-shadow: 0 10 25px rgba(0, 0, 0, 0.4);
+}/* ARREGLO DE ESPACIADO PARA LA CALCULADORA */
+.volt-panel {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #444;
+}
+
+.volt-panel label {
+    display: block;
+    color: #00ff00;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+#comparativa-consumo {
+    margin-top: 20px;
+    padding: 10px;
+    font-size: 0.9em;
+    color: #aaa;
+    border-top: 1px dashed #444;
+    min-height: 20px;
+}
+
+/* Evitar que las cajas verdes se encimen */
+.resistencia-visual {
+    min-width: 50px;
+    padding: 5px;
+    text-align: center;
+}
+/* ----------------------------------------------------------- */
+/* MODULO DE EMERGENCIA (EFECTO EXPLOSIÓN)                    */
+/* ----------------------------------------------------------- */
+/* Vibración ligera exclusiva para el dashboard */
+.alerta-total {
+    border: 2px solid #ff0000 !important;
+    position: relative;
+    /* Usamos transform para que la tarjeta de video trabaje menos */
+    animation: vibrar-ligero 0.2s infinite linear !important; 
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.4) !important;
+}
+
+@keyframes vibrar-ligero {
+    0% { transform: translate(1px, 1px); }
+    25% { transform: translate(-1px, 0px); }
+    50% { transform: translate(1px, -1px); }
+    75% { transform: translate(-1px, 1px); }
+    100% { transform: translate(0px, 0px); }
+}
+
+/* Foco rojo sin sombras pesadas */
+.foco-quemado {
+    background-color: #ff0000 !important;
+    box-shadow: 0 0 10px #ff0000 !important;
+    animation: parpadeo-simple 0.3s infinite !important;
+}
+
+@keyframes parpadeo-simple {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+/* Animación de flujo eléctrico */
+.cable-entrada, .cable-salida, .nodos-paralelo {
+    transition: all 0.3s ease;
+}
+
+.flujo-activo {
+    box-shadow: 0 0 15px #00ff00;
+    border-color: #00ff00 !important;
+}
+
+/* Efecto de partículas moviéndose (opcional pero pro) */
+@keyframes electricidad {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+}
+.contenedor-trivia {
+    margin: 10px 0;
+    padding: 40px;
+    background: rgba(80, 78, 78, 0.637);
+    border-radius: 15px;
+    border: 1px solid #333;
+    width: 100%;
+    max-width: 900px;
+}
+
+.grid-trivia {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.tarjeta-trivia {
+    background: #222;
+    padding: 15px;
+    border-radius: 10px;
+    border-left: 4px solid #ffee00;
+    transition: 0.3s;
+    cursor: default;
+}
+
+.tarjeta-trivia:hover {
+    background: #2a2a2a;
+    transform: scale(1.02);
+    box-shadow: 0 0 15px rgb(255, 230, 0);
+}
+
+.tarjeta-trivia span {
+    font-size: 2em;
+    display: block;
+    margin-bottom: 10px;
 }

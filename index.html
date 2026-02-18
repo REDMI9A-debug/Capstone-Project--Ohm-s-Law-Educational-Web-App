@@ -105,34 +105,46 @@
         <li>3. Haz clic en "Calcular RT".</li>
     </ul>
   </div>
+<div class="seccion-dashboard">
+    <div class="wrapper-neon">
+        <div class="calculadora-neon">
+            <h3>🧮 Calculadora de Ingeniería</h3>
+            <div class="volt-panel">
+                <label>🔋 Voltaje de Fuente: <span id="v-val">9</span>V</label>
+                <input type="range" id="v-slider" min="1" max="24" value="9">
+                <p style="color: #ff4444; font-size: 0.75em; margin-top: 10px; font-weight: bold;">
+                    ⚠️ Límite de seguridad: 20 Amperios (o el laboratorio hará BUM).
+                </p>
+            </div>
+            
+            <p>Ingresa valores (separados por comas):</p>
+            <div class="input-group">
+                <input type="text" id="resistenciasInput" placeholder="Ej: 10, 20, 30">
+            </div>
 
-  <div class="seccion-dashboard">
-      <div class="wrapper-neon">
-          <div class="calculadora-neon">
-              <h3>🧮 Calculadora de Resistencia en Paralelo</h3>
-              <div class="input-group">
-                  <input type="text" id="resistenciasInput" placeholder="Ejemplo: 10, 20, 30">
-                  <button class="btn-calc" onclick="calcularParalelo()">Calcular RT</button>
-              </div>
-              <div id="resultado">Resultado: --</div>
-          </div>
-      </div>
+            <div id="resultado">Resultado: --</div>
+            <div id="comparativa-consumo">Consumo estimado: Esperando datos...</div>
+            <div id="ley-ohm-info" style="margin-top: 15px; font-size: 0.8em; color: #888; border-top: 1px solid #333; padding-top: 10px;">
+    💡 Tip: I = V / Rt | <span id="formula-dinamica">Esperando valores...</span>
+</div>
+        </div>
+    </div>
 
-      <div class="simulador-container">
-          <h4>Simulación del Circuito en Paralelo</h4>
-          <div class="circuito-sim">
-              <div class="cable-entrada"></div>
-              <div class="nodos-paralelo">
-                  <div class="rama-sim"><div class="resistencia-visual" id="vis-R1">R1</div></div>
-                  <div class="rama-sim"><div class="resistencia-visual" id="vis-R2">R2</div></div>
-                  <div class="rama-sim"><div class="resistencia-visual" id="vis-R3">R3</div></div>
-              </div>
-              <div class="cable-salida"></div>
-          </div>
-          <p id="info-simulacion">Escribe valores arriba para ver el flujo.</p>
-      </div>
-  </div>
-
+    <div class="simulador-container">
+        <h4>Simulación del Circuito en Paralelo</h4>
+        <div class="circuito-sim">
+            <div class="cable-entrada"></div>
+            <div class="nodos-paralelo">
+                <div class="rama-sim"><div class="bulb" id="vis-R1"></div></div>
+                <div class="rama-sim"><div class="bulb" id="vis-R2"></div></div>
+                <div class="rama-sim"><div class="bulb" id="vis-R3"></div></div>
+            </div>
+            <div class="cable-salida"></div>
+        </div>
+        <p id="info-simulacion">¿Tu pintaste esto 🗣? </p>
+    </div>
+</div>
+ 
   <div class="seccion-casos">
     <h1 class="titulo-casos">Aplicaciones en el Mundo Real</h1>
     <div class="contenedor-casos">
@@ -153,38 +165,23 @@
         </div>
     </div>
   </div>
-
-  <script>
-    function calcularParalelo() {
-      let input = document.getElementById("resistenciasInput").value;
-      let valores = input.split(',').map(v => v.trim()).filter(v => v !== "").map(Number);
-      let sumaInversas = 0;
-      let error = false;
-
-      for (let i = 1; i <= 3; i++) {
-          let caja = document.getElementById("vis-R" + i);
-          if (caja) { caja.innerText = "R" + i; caja.style.color = "white"; caja.style.boxShadow = "none"; caja.style.borderColor = "white"; }
-      }
-
-      valores.forEach((r, index) => {
-          if (r > 0 && index < 3) {
-              sumaInversas += (1 / r);
-              let idVisual = "vis-R" + (index + 1);
-              let cajaVisual = document.getElementById(idVisual);
-              if (cajaVisual) { cajaVisual.innerText = r + " Ω"; cajaVisual.style.color = "#00ff00"; cajaVisual.style.borderColor = "#00ff00"; cajaVisual.style.boxShadow = "0 0 10px #00ff00"; }
-          } else if (r <= 0) { error = true; }
-      });
-
-      let resultadoDiv = document.getElementById("resultado");
-      if (error || valores.length === 0 || input === "") {
-          resultadoDiv.innerHTML = "❌ Ingresa números válidos.";
-          resultadoDiv.style.color = "#ff4444";
-      } else {
-          let resistenciaTotal = 1 / sumaInversas;
-          resultadoDiv.innerHTML = "✅ Resistencia Total (R<sub>T</sub>): " + resistenciaTotal.toFixed(2) + " Ω";
-          resultadoDiv.style.color = "#007bff";
-      }
-    }
-  </script>
+  <div class="contenedor-trivia">
+    <h3 style="color: #fbff00; text-align: center;">💡 ¿Sabías qué? (Datos de Ingeniería)</h3>
+    <div class="grid-trivia">
+        <div class="tarjeta-trivia" data-info="voltaje">
+            <span>🔋</span>
+            <p><strong>El Voltaje</strong> es como la presión del agua en una manguera.</p>
+        </div>
+        <div class="tarjeta-trivia" data-info="resistencia">
+            <span>🚧</span>
+            <p><strong>La Resistencia</strong> es qué tan estrecha es esa manguera.</p>
+        </div>
+        <div class="tarjeta-trivia" data-info="corriente">
+            <span>⚡</span>
+            <p><strong>La Corriente</strong> es la cantidad de agua que fluye realmente.</p>
+        </div>
+    </div>
+</div>
+  <script src="main.js"></script>
 </body>
 </html>
