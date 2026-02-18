@@ -29,10 +29,10 @@
   .circuit-container {
     display: flex;
     align-items: center;
-    background: #1e1e1e;
+    background: #1a1919;
     padding: 60px;
     border-radius: 15px;
-    border: 1px solid #333;
+    border: 1px solid #5f5a5a;
     position: relative;
     margin-bottom: 20px;
   }
@@ -40,10 +40,10 @@
   .label {
     position: absolute;
     font-size: 12px;
-    background: rgba(0, 0, 0, 0.219);
+    background: rgba(66, 66, 66, 0.473);
     padding: 2px 6px;
     border-radius: 4px;
-    color: #242424;
+    color: #ffffff;
   }
 
   .wire-rail { height: 4px; background: var(--wire-off); transition: background 0.3s; }
@@ -71,7 +71,7 @@
   .subtheme-card:hover { transform: translateY(-3px); background-color: #333; }
   .subtheme-icon { font-size: 22px; margin-bottom: 8px; }
   
-  .seccion-info { display: flex; justify-content: space-between; align-items: center; width: 90%; max-width: 1000px; margin: 15px auto; background-color: #1a1919; padding: 25px; border-radius: 10px; border: 3px solid #333; flex-wrap: wrap; gap: 20px; }
+  .seccion-info { display: flex; justify-content: space-between; align-items: center; width: 90%; max-width: 1000px; margin: 15px auto; background-color: #1b1b1b; padding: 25px; border-radius: 10px; border: 3px solid #333; flex-wrap: wrap; gap: 20px; }
   .texto-contenido { flex: 1; text-align: left; color: rgb(255, 255, 255); min-width: 300px; }
   .seccion-info img { border-radius: 5px; background-color: rgba(54, 54, 54, 0.123); padding: 5px; max-width: 100%; height: auto; }
 
@@ -244,8 +244,7 @@
 .tarjeta-caso, 
 .subtheme-card, 
 .pasos-superiores,
-.simulador-container,
-.contenedor-trivia {
+.simulador-container {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -340,7 +339,7 @@
 .contenedor-trivia {
     margin: 10px 0;
     padding: 40px;
-    background: rgba(80, 78, 78, 0.637);
+    background: rgb(31, 30, 30);
     border-radius: 15px;
     border: 1px solid #333;
     width: 100%;
