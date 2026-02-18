@@ -343,7 +343,7 @@
     border-radius: 15px;
     border: 1px solid #333;
     width: 100%;
-    max-width: 900px;
+    max-width: 800px;
 }
 
 .grid-trivia {
@@ -369,7 +369,106 @@
 }
 
 .tarjeta-trivia span {
-    font-size: 3em;
+    font-size: 1em;
     display: block;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+}
+/*hola vlo*/
+/* Contenedor Principal del Footer */
+.footer-maestro {
+    margin-top: 80px;
+    padding: 60px 20px;
+    background: linear-gradient(to bottom, transparent, #0a0a0a);
+    border-top: 1px solid #333;
+}
+
+.header-gracias {
+    text-align: center;
+    color: #ffeb3b;
+    font-size: 2em;
+    margin-bottom: 40px;
+    text-shadow: 0 0 10px rgba(255, 235, 59, 0.4);
+}
+
+/* Sistema de Columnas */
+.columnas-finales {
+    display: flex;
+    gap: 30px;
+    max-width: 1100px;
+    margin: 0 auto;
+    flex-wrap: wrap; /* Para que en celular se pongan uno abajo del otro */
+}
+
+.col-final {
+    flex: 1; /* Esto hace que ambos midan lo mismo */
+    min-width: 300px;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 30px;
+    border-radius: 20px;
+    border: 1px solid #222;
+    transition: 0.3s;
+}
+
+.col-final:hover {
+    border-color: #ffeb3b;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.col-final h3 {
+    color: #ffeb3b;
+    margin-top: 0;
+    border-bottom: 1px solid #333;
+    padding-bottom: 10px;
+}
+
+/* Estilos de la izquierda */
+.izquierda p {
+    color: #bbb;
+    line-height: 1.6;
+    font-style: italic;
+    font-size: 0.95em;
+}
+
+/* Estilos de la derecha */
+.lista-contacto {
+    list-style: none;
+    padding: 0;
+}
+
+.lista-contacto li {
+    margin-bottom: 15px;
+    color: #fff;
+    font-size: 1.05em;
+}
+
+.lista-contacto strong {
+    color: #ffeb3b;
+    display: inline-block;
+    width: 100px;
+}
+
+.estado-dev {
+    margin-top: 20px;
+    font-size: 0.8em;
+    background: #111;
+    display: inline-block;
+    padding: 5px 15px;
+    border-radius: 20px;
+    color: #00ff00;
+    border: 1px solid #004400;
+}
+.iconodios {
+  
+    text-align: center;
+    color: #ffeb3b;
+    font-size: 2em;
+    margin-bottom: 40px;
+    text-shadow: 0 0 10px rgba(255, 235, 59, 0.4);
+}
+.thanks-god {
+  text-align: center;
+    color: #ffffff;
+    font-size: 1.5em;
+    margin-top: 20px;
+    text-shadow: 0 0 10px rgb(21, 187, 238);
 }
