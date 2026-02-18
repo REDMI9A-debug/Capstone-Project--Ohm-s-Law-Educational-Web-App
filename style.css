@@ -460,10 +460,10 @@
 .iconodios {
   
     text-align: center;
-    color: #ffeb3b;
+    color: #d31b1b;
     font-size: 2em;
     margin-bottom: 40px;
-    text-shadow: 0 0 10px rgba(255, 235, 59, 0.4);
+    text-shadow: 0 0 10px rgba(255, 0, 0, 0.733);
 }
 .thanks-god {
   text-align: center;
@@ -471,4 +471,97 @@
     font-size: 1.5em;
     margin-top: 20px;
     text-shadow: 0 0 10px rgb(21, 187, 238);
+}
+.contenedor-final-imagen {
+    display: flex;
+    flex-direction: column; /* Pone el texto arriba y la imagen abajo */
+    align-items: center;    /* Centra todo horizontalmente */
+    justify-content: center;
+    margin: 40px auto;      /* Centra el contenedor y le da espacio */
+    max-width: 600px;       /* Ajusta este número al ancho que quieras para el texto */
+    text-align: center;
+}
+
+.texto-bendicion {
+    font-size: 1.5em;
+    color: #fff;
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.5); /* Un brillito azul como en tu captura */
+    margin-bottom: 20px;
+    width: 100%;            /* Ocupa todo el ancho del contenedor */
+}
+
+.imagen-final {
+    width: 100%;            /* La imagen se estira EXACTAMENTE al ancho del texto */
+    height: auto;           /* Mantiene la proporción para que no se vea aplastada */
+    border-radius: 15px;    /* Bordes redondeados para que se vea moderna */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border: 1px solid #333;
+}
+/* Contenedor que genera el resplandor general */
+.aura-roja {
+    position: relative;
+    display: inline-block;
+    line-height: 0; /* Quita espacios extraños bajo la imagen */
+    border-radius: 15px;
+    /* Resplandor exterior (lejos de la imagen) */
+    animation: resplandorTotal 3s infinite alternate;
+}
+
+.imagen-final {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    border-radius: 15px;
+    border: 3px solid #ff0000; /* Marco rojo sólido para la fuente de luz */
+    position: relative;
+    z-index: 2;
+    /* Resplandor pegado al marco (neón) */
+    box-shadow: 0 0 10px #ff0000, 
+                0 0 30px #ff0000; 
+}
+
+/* Animación que hace que TODO el marco brille con fuerza */
+@keyframes resplandorTotal {
+    0% {
+        box-shadow: 0 0 20px rgba(255, 0, 0, 0.4), 
+                    0 0 50px rgba(255, 0, 0, 0.2);
+        filter: brightness(1);
+    }
+    100% {
+        box-shadow: 0 0 0px rgba(255, 0, 0, 0.9), 
+                    0 0 50px rgba(255, 0, 0, 0.6),
+                    0 0 100px rgba(255, 0, 0, 0.3);
+        filter: brightness(1.2); /* La imagen también brilla un poco */
+    }
+}
+
+/* Opcional: Centrar el contenedor en la página */
+.contenedor-final-imagen {
+    text-align: center;
+    margin: 50px auto;
+    padding: 20px;
+}
+.copyright-container {
+    margin-top: 40px;
+    padding: 20px;
+    text-align: center;
+    border-top: 1px solid #222; /* Una línea muy sutil */
+    color: #555; /* Color gris oscuro para que no distraiga */
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.tagline {
+    margin-top: 5px;
+    color: #888;
+    font-weight: bold;
+    font-style: normal;
+}
+
+/* Un pequeño detalle: que tu nombre brille un poco al pasar el mouse */
+.tagline:hover {
+    color: #ffeb3b; /* Amarillo como tu trivia */
+    text-shadow: 0 0 5px rgba(255, 235, 59, 0.5);
+    transition: 0.3s;
 }
